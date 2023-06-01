@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class UIManagerScript : MonoBehaviour
 {
@@ -9,21 +10,25 @@ public class UIManagerScript : MonoBehaviour
     [SerializeField] GameObject _activeCanvas;
 
     private static UIManagerScript _UIManagerInstance = null;
-    private GameManagerScript _gameManager;
-    private EventSystem _eventSystem;
+    [SerializeField] private GameManagerScript _gameManager;
+    [SerializeField] private EventSystem _eventSystem;
+    [SerializeField] private int _activeSceneIndex;
 
     void Awake()
     {
         UIManagerSingleton();    
+        SetUpGameManager();
     }
     private void Start()
     {
-        SetUpGameManager();
         SetUpStartingCanvas();
         SetUpEventSystem();
     }
 
-    // Methods
+    // Getter & Setters
+    public GameObject ActiveCanvas { get { return _activeCanvas; } set { _activeCanvas = value; } }
+   
+   // Methods
     private void UIManagerSingleton()
     {
         if (_UIManagerInstance == null)
@@ -36,33 +41,27 @@ public class UIManagerScript : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+    }   
+    private void SetUpGameManager() 
+    {
+        _gameManager = FindObjectOfType<GameManagerScript>();
     }
-
-    public GameObject ActiveCanvas { get { return _activeCanvas; } set { _activeCanvas = value; } }
-
     private void SetUpStartingCanvas()
     {
+        _activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
         foreach (GameObject item in _canvasList)
         {
             item.SetActive(false);
         }
-        Debug.Log(_gameManager.ActiveScene.buildIndex);
-        _canvasList[_gameManager.ActiveScene.buildIndex].SetActive(true);
-        
-        _activeCanvas = _canvasList[_gameManager.ActiveScene.buildIndex];
+        _canvasList[_activeSceneIndex].SetActive(true);
+        _activeCanvas = _canvasList[_activeSceneIndex];
         _gameManager.ActiveCanvas = ActiveCanvas;
-        //_canvasList[1].SetActive(true);
-        //_activeCanvas = _canvasList[1];
     }
     private void SetUpEventSystem()
     {
         _eventSystem = gameObject.GetComponentInChildren<EventSystem>();
         _eventSystem.SetSelectedGameObject(ActiveCanvas.GetComponent<RectTransform>().GetChild(0).gameObject);
-    }
-    private void SetUpGameManager() 
-    {
-        _gameManager = FindObjectOfType<GameManagerScript>();
-    }
+    }   
     public void LoadCanvas(int canvasIndex)
     {
         _activeCanvas.SetActive(false);

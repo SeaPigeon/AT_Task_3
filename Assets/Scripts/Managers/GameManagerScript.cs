@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+
 public enum GameState
 {
     Debug = 0,
@@ -19,6 +20,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameState _activeGameState;
     [SerializeField] AudioClip _currentAudioClipLoaded;
     [SerializeField] bool _audioClipPlaying;
+    [SerializeField] int _sceneLoadedIndex;
 
     private static GameManagerScript _instance = null;
 
@@ -37,6 +39,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject ActiveCanvas { get { return _activeCanvas; } set { _activeCanvas = value; } }
     public AudioClip CurrentAudioClipLoaded { get { return _currentAudioClipLoaded; } set { _currentAudioClipLoaded = value; } }
     public bool AudioClipPlaying { get { return _audioClipPlaying; } set { _audioClipPlaying = value; } }
+    public int SceneLoadedIndex { get { return _sceneLoadedIndex; } set { _sceneLoadedIndex = value; } }
 
     // Methods
     private void GameManagerSingleton()
@@ -56,6 +59,15 @@ public class GameManagerScript : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+    public void GameManagerDebugLog()
+    {
+        Debug.Log("SceneManager_ActiveSceneName: " + SceneManager.GetActiveScene().name);
+        Debug.Log("GM_ActiveSceneName: " + ActiveSceneName);
+        Debug.Log("GM_ActiveCanvas: " + ActiveCanvas);
+        Debug.Log("GM_GameState: " + ActiveGameState);
+        Debug.Log("GM_ClipLoaded: " + CurrentAudioClipLoaded);
+        Debug.Log("GM_AudioclipPlaying: " + AudioClipPlaying);
     }
 }
 
