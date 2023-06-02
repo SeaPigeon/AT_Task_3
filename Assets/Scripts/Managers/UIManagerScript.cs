@@ -12,15 +12,15 @@ public class UIManagerScript : MonoBehaviour
     private static UIManagerScript _UIManagerInstance = null;
     [SerializeField] private GameManagerScript _gameManager;
     [SerializeField] private EventSystem _eventSystem;
-    [SerializeField] private int _activeSceneIndex;
 
     void Awake()
     {
         UIManagerSingleton();    
-        SetUpGameManager();
+        
     }
     private void Start()
     {
+        SetUpGameManager();
         SetUpStartingCanvas();
         SetUpEventSystem();
     }
@@ -45,16 +45,17 @@ public class UIManagerScript : MonoBehaviour
     private void SetUpGameManager() 
     {
         _gameManager = FindObjectOfType<GameManagerScript>();
+        _gameManager.GameManagerDebugLog();
     }
     private void SetUpStartingCanvas()
     {
-        _activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
         foreach (GameObject item in _canvasList)
         {
             item.SetActive(false);
         }
-        _canvasList[_activeSceneIndex].SetActive(true);
-        _activeCanvas = _canvasList[_activeSceneIndex];
+
+        _canvasList[_gameManager.SceneLoadedIndex].SetActive(true);
+        ActiveCanvas = _canvasList[_gameManager.SceneLoadedIndex];
         _gameManager.ActiveCanvas = ActiveCanvas;
     }
     private void SetUpEventSystem()

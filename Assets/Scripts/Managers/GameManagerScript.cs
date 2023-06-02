@@ -27,6 +27,7 @@ public class GameManagerScript : MonoBehaviour
     void Awake()
     {
         GameManagerSingleton();
+        SetUpGameManager();
     }
 
     // Getters && Setters
@@ -36,11 +37,11 @@ public class GameManagerScript : MonoBehaviour
     public GameState ActiveGameState { get { return _activeGameState; } set { _activeGameState = value; } }
     public Scene ActiveScene { get { return _activeScene; } set { _activeScene = value; } }
     public string ActiveSceneName { get { return _activeSceneName; } set { _activeSceneName = value; } }
+    public int SceneLoadedIndex { get { return _sceneLoadedIndex; } set { _sceneLoadedIndex = value; } }
     public GameObject ActiveCanvas { get { return _activeCanvas; } set { _activeCanvas = value; } }
     public AudioClip CurrentAudioClipLoaded { get { return _currentAudioClipLoaded; } set { _currentAudioClipLoaded = value; } }
     public bool AudioClipPlaying { get { return _audioClipPlaying; } set { _audioClipPlaying = value; } }
-    public int SceneLoadedIndex { get { return _sceneLoadedIndex; } set { _sceneLoadedIndex = value; } }
-
+    
     // Methods
     private void GameManagerSingleton()
     {
@@ -55,7 +56,36 @@ public class GameManagerScript : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-
+    private void SetUpGameManager()
+    {
+        ActiveScene = SceneManager.GetActiveScene();
+        ActiveSceneName = ActiveScene.name;
+        SceneLoadedIndex = ActiveScene.buildIndex;
+        SetGameState();
+    }
+    public void SetGameState()
+    {
+        if (ActiveScene.name == "DebugScene")
+        {
+            ActiveGameState = GameState.Debug;
+        }
+        else if (ActiveScene.name == "MainMenu")
+        {
+            ActiveGameState = GameState.InMenu;
+        }
+        else if (ActiveScene.name == "ControlsMenu")
+        {
+            ActiveGameState = GameState.InMenu;
+        }
+        else if (ActiveScene.name == "LevelEditor")
+        {
+            ActiveGameState = GameState.InEditor;
+        }
+        else if (ActiveScene.name == "Level_1")
+        {
+            ActiveGameState = GameState.InGame;
+        }
+    }
     public void QuitGame()
     {
         Application.Quit();

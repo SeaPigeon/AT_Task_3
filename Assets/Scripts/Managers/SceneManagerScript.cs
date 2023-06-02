@@ -6,16 +6,12 @@ using UnityEngine.EventSystems;
 
 public class SceneManagerScript : MonoBehaviour
 {
-    [SerializeField] string[] MenuScenes;
-    [SerializeField] string[] InGameScenes;
-    [SerializeField] string[] InEditorScenes;
-    [SerializeField] string[] InDebugScenes;
-
     Scene _activeScene;
     
-    private static SceneManagerScript _instance;
+    private static SceneManagerScript _SceneManagerInstance;
     private GameManagerScript _gameManager;
 
+    // Main
     private void Awake()
     {
         SceneManagerSingleton();
@@ -25,15 +21,17 @@ public class SceneManagerScript : MonoBehaviour
         SetUpGameManager();
     }
 
+    // Getters & Setters
     public Scene ActiveScene { get { return _activeScene; } set { _activeScene = value; } }
 
+    // Methods
     private void SceneManagerSingleton()
     {
-        if (_instance == null)
+        if (_SceneManagerInstance == null)
         {
-            _instance = this;
+            _SceneManagerInstance = this;
         }
-        else if (_instance != this)
+        else if (_SceneManagerInstance != this)
         {
             Destroy(gameObject);
         }
@@ -42,42 +40,16 @@ public class SceneManagerScript : MonoBehaviour
     }
     private void SetUpGameManager()
     {
-        ActiveScene = SceneManager.GetActiveScene();
         _gameManager = FindObjectOfType<GameManagerScript>();
-        _gameManager.ActiveScene = ActiveScene;
-        _gameManager.ActiveSceneName = ActiveScene.name;
-        _gameManager.SceneLoadedIndex = ActiveScene.buildIndex;
-        SetUpGameState();
     }
-    private void SetUpGameState()
-    {
-        if (ActiveScene.name == "DebugScene")
-        {
-            _gameManager.ActiveGameState = GameState.Debug;
-        }
-        else if (ActiveScene.name == "MainMenu")
-        {
-            _gameManager.ActiveGameState = GameState.InMenu;
-        }
-        else if (ActiveScene.name == "ControlsMenu")
-        {
-            _gameManager.ActiveGameState = GameState.InMenu;
-        }
-        else if (ActiveScene.name == "LevelEditor")
-        {
-            _gameManager.ActiveGameState = GameState.InEditor;
-        }
-        else if (ActiveScene.name == "Level_1")
-        {
-            _gameManager.ActiveGameState = GameState.InGame;
-        }
-    }
+    
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
         ActiveScene = SceneManager.GetActiveScene();
         _gameManager.ActiveScene = ActiveScene;
         _gameManager.ActiveSceneName = ActiveScene.name;
-        SetUpGameState();
+        _gameManager.SceneLoadedIndex = ActiveScene.buildIndex;
+        _gameManager.SetGameState();
     }
 }
