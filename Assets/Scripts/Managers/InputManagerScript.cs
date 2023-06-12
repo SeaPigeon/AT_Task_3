@@ -21,6 +21,7 @@ public class InputManagerScript : MonoBehaviour
     private void Awake()
     {
         InputManagerSingleton();
+        SetUpInputMap();
         SetUpInputs();
     }
 
@@ -36,39 +37,52 @@ public class InputManagerScript : MonoBehaviour
     public bool StartInput { get { return _startInput; } set { _startInput = value; } }
 
     // Methods
-    private void SetUpInputs()
+    private void SetUpInputMap()
     {
         _inputMap = new InputMap();
-        _inputMap.Player.Enable();
+        EnableInputMap(ref _inputMap.UI);
+        _inputMap.Enable();
+    }
 
-        _inputMap.Player.DPad.performed += OnDpad;
-        _inputMap.Player.ButtonSouth.performed += OnButtonSouth;
-        _inputMap.Player.ButtonWest.performed += OnButtonWest;
-        _inputMap.Player.ButtonNorth.performed += OnButtonNorth;
-        _inputMap.Player.ButtonEast.performed += OnButtonEast;
-        _inputMap.Player.ShoulderR.performed += OnShoulderR;
-        _inputMap.Player.ShoulderL.performed += OnShoulderL;
-        _inputMap.Player.StartButton.performed += OnStart;
+    private void EnableInputMap(ref InputMap map)
+    {
+        _inputMap.Disable();
+        map.Enable();
+    }
 
-        _inputMap.Player.DPad.canceled += OnDpad;
-        _inputMap.Player.ButtonSouth.canceled += OnButtonSouth;
-        _inputMap.Player.ButtonWest.canceled += OnButtonWest;
-        _inputMap.Player.ButtonNorth.canceled += OnButtonNorth;
-        _inputMap.Player.ButtonEast.canceled += OnButtonEast;
-        _inputMap.Player.ShoulderR.canceled += OnShoulderR;
-        _inputMap.Player.ShoulderL.canceled += OnShoulderL;
-        _inputMap.Player.StartButton.canceled += OnStart;
+    private void SetUpInputs()
+    {
+        
+        //_inputMap.UI.Enable();
+
+        _inputMap.UI.DPad.performed += OnDpad;
+        _inputMap.UI.ButtonSouth.performed += OnButtonSouth;
+        _inputMap.UI.ButtonWest.performed += OnButtonWest;
+        _inputMap.UI.ButtonNorth.performed += OnButtonNorth;
+        _inputMap.UI.ButtonEast.performed += OnButtonEast;
+        _inputMap.UI.ShoulderR.performed += OnShoulderR;
+        _inputMap.UI.ShoulderL.performed += OnShoulderL;
+        _inputMap.UI.StartButton.performed += OnStart;
+
+        _inputMap.UI.DPad.canceled += OnDpad;
+        _inputMap.UI.ButtonSouth.canceled += OnButtonSouth;
+        _inputMap.UI.ButtonWest.canceled += OnButtonWest;
+        _inputMap.UI.ButtonNorth.canceled += OnButtonNorth;
+        _inputMap.UI.ButtonEast.canceled += OnButtonEast;
+        _inputMap.UI.ShoulderR.canceled += OnShoulderR;
+        _inputMap.UI.ShoulderL.canceled += OnShoulderL;
+        _inputMap.UI.StartButton.canceled += OnStart;
     }
     private void UnsubscribeInputs()
     {
-        _inputMap.Player.DPad.performed -= OnDpad;
-        _inputMap.Player.ButtonSouth.performed -= OnButtonSouth;
-        _inputMap.Player.ButtonWest.performed -= OnButtonWest;
-        _inputMap.Player.ButtonNorth.performed -= OnButtonNorth;
-        _inputMap.Player.ButtonEast.performed -= OnButtonEast;
-        _inputMap.Player.ShoulderR.performed -= OnShoulderR;
-        _inputMap.Player.ShoulderL.performed -= OnShoulderL;
-        _inputMap.Player.StartButton.performed -= OnStart;
+        _inputMap.UI.DPad.performed -= OnDpad;
+        _inputMap.UI.ButtonSouth.performed -= OnButtonSouth;
+        _inputMap.UI.ButtonWest.performed -= OnButtonWest;
+        _inputMap.UI.ButtonNorth.performed -= OnButtonNorth;
+        _inputMap.UI.ButtonEast.performed -= OnButtonEast;
+        _inputMap.UI.ShoulderR.performed -= OnShoulderR;
+        _inputMap.UI.ShoulderL.performed -= OnShoulderL;
+        _inputMap.UI.StartButton.performed -= OnStart;
     }
 
     private void OnDpad(InputAction.CallbackContext context) 

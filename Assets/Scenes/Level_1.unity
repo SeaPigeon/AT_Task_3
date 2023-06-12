@@ -469,6 +469,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10819bebf9c942f4c9f2f222b2073682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _MAX_HEALTH: 100
+  _currentHealth: 0
+  _moveSpeed: 0
+  _runSpeed: 0
+  _fireDelay: 0
+  _sceneToLoadOnDeath: 
+  _gameManager: {fileID: 0}
+  _sceneManager: {fileID: 0}
   _inputManager: {fileID: 0}
 --- !u!1001 &969318997
 PrefabInstance:
@@ -867,6 +875,10 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 1031094749}
+    - target: {fileID: 6487002628642579695, guid: 28cba4dc7d585d845a657cca292e370d, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 833187e2-bcd1-42c5-985c-185eb0fc18e7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28cba4dc7d585d845a657cca292e370d, type: 3}
 --- !u!1001 &1954996618

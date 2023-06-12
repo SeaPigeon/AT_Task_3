@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using Cinemachine;
 
 public enum GameState
 {
@@ -14,13 +15,16 @@ public enum GameState
 public class GameManagerScript : MonoBehaviour
 {
     [Header("Game Variables")]
-    [SerializeField] string _activeSceneName;
     private Scene _activeScene;
+    [SerializeField] string _activeSceneName;
+    [SerializeField] int _sceneLoadedIndex;
     [SerializeField] GameObject _activeCanvas;
     [SerializeField] GameState _activeGameState;
+    [SerializeField] CinemachineVirtualCamera _activeCamera;
     [SerializeField] AudioClip _currentAudioClipLoaded;
     [SerializeField] bool _audioClipPlaying;
-    [SerializeField] int _sceneLoadedIndex;
+    
+    [SerializeField] int _score;
 
     private static GameManagerScript _instance = null;
 
@@ -28,20 +32,23 @@ public class GameManagerScript : MonoBehaviour
     {
         GameManagerSingleton();
         SetUpGameManager();
+        ResetScore();
     }
 
     // Getters && Setters
     public GameManagerScript GameManagerInstance { get { return _instance; } }
 
     // G&S States
-    public GameState ActiveGameState { get { return _activeGameState; } set { _activeGameState = value; } }
     public Scene ActiveScene { get { return _activeScene; } set { _activeScene = value; } }
     public string ActiveSceneName { get { return _activeSceneName; } set { _activeSceneName = value; } }
     public int SceneLoadedIndex { get { return _sceneLoadedIndex; } set { _sceneLoadedIndex = value; } }
     public GameObject ActiveCanvas { get { return _activeCanvas; } set { _activeCanvas = value; } }
+    public GameState ActiveGameState { get { return _activeGameState; } set { _activeGameState = value; } }
+    public CinemachineVirtualCamera ActiveCamera {get { return _activeCamera; } set { _activeCamera = value; } }
     public AudioClip CurrentAudioClipLoaded { get { return _currentAudioClipLoaded; } set { _currentAudioClipLoaded = value; } }
     public bool AudioClipPlaying { get { return _audioClipPlaying; } set { _audioClipPlaying = value; } }
-    
+    public int Score { get { return _score; } set { _score = value; } }
+
     // Methods
     private void GameManagerSingleton()
     {
@@ -98,6 +105,14 @@ public class GameManagerScript : MonoBehaviour
         Debug.Log("GM_GameState: " + ActiveGameState);
         Debug.Log("GM_ClipLoaded: " + CurrentAudioClipLoaded);
         Debug.Log("GM_AudioclipPlaying: " + AudioClipPlaying);
+    }
+    public void ChangeScore(int modifier)
+    {
+        Score += modifier;
+    }
+    public void ResetScore()
+    {
+        Score = 0;
     }
 }
 
