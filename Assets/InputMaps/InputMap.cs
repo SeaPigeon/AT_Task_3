@@ -27,7 +27,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ButtonEast"",
+                    ""name"": ""East"",
                     ""type"": ""Button"",
                     ""id"": ""1bbcff16-1342-463d-a403-f2fe60828bce"",
                     ""expectedControlType"": ""Button"",
@@ -35,7 +35,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ButtonNorth"",
+                    ""name"": ""North"",
                     ""type"": ""Button"",
                     ""id"": ""afc2d6c9-8708-4e31-b408-b3c5efe828bc"",
                     ""expectedControlType"": ""Button"",
@@ -43,7 +43,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ButtonSouth"",
+                    ""name"": ""South"",
                     ""type"": ""Button"",
                     ""id"": ""4a5bf5a6-4c4b-4ab5-ac0b-f87b097df1a7"",
                     ""expectedControlType"": ""Button"",
@@ -51,7 +51,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ButtonWest"",
+                    ""name"": ""West"",
                     ""type"": ""Button"",
                     ""id"": ""d4f6ff8f-916a-41ae-9822-6ddaa026d573"",
                     ""expectedControlType"": ""Button"",
@@ -59,7 +59,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""StartButton"",
+                    ""name"": ""Start"",
                     ""type"": ""Button"",
                     ""id"": ""13a2b447-da67-4855-a3ce-5919f0df68ae"",
                     ""expectedControlType"": ""Button"",
@@ -67,7 +67,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ShoulderL"",
+                    ""name"": ""SL"",
                     ""type"": ""Button"",
                     ""id"": ""563d8146-787a-48d9-9b4a-d91cc7f55753"",
                     ""expectedControlType"": ""Button"",
@@ -75,7 +75,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ShoulderR"",
+                    ""name"": ""SR"",
                     ""type"": ""Button"",
                     ""id"": ""20221624-ab12-4a2f-8bbf-ff7cb0e1507e"",
                     ""expectedControlType"": ""Button"",
@@ -245,7 +245,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ButtonWest"",
+                    ""action"": ""West"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -256,7 +256,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""StartButton"",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -267,7 +267,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""StartButton"",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -278,7 +278,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ShoulderL"",
+                    ""action"": ""SL"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -289,7 +289,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ShoulderL"",
+                    ""action"": ""SL"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -300,7 +300,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ButtonEast"",
+                    ""action"": ""East"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -311,7 +311,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ButtonEast"",
+                    ""action"": ""East"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -322,7 +322,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ButtonSouth"",
+                    ""action"": ""South"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -333,7 +333,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ButtonSouth"",
+                    ""action"": ""South"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -344,7 +344,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ButtonNorth"",
+                    ""action"": ""North"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -355,7 +355,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ShoulderR"",
+                    ""action"": ""SR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -366,7 +366,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ShoulderR"",
+                    ""action"": ""SR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -797,13 +797,13 @@ public class @InputMap : IInputActionCollection, IDisposable
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
-        m_Game_ButtonEast = m_Game.FindAction("ButtonEast", throwIfNotFound: true);
-        m_Game_ButtonNorth = m_Game.FindAction("ButtonNorth", throwIfNotFound: true);
-        m_Game_ButtonSouth = m_Game.FindAction("ButtonSouth", throwIfNotFound: true);
-        m_Game_ButtonWest = m_Game.FindAction("ButtonWest", throwIfNotFound: true);
-        m_Game_StartButton = m_Game.FindAction("StartButton", throwIfNotFound: true);
-        m_Game_ShoulderL = m_Game.FindAction("ShoulderL", throwIfNotFound: true);
-        m_Game_ShoulderR = m_Game.FindAction("ShoulderR", throwIfNotFound: true);
+        m_Game_East = m_Game.FindAction("East", throwIfNotFound: true);
+        m_Game_North = m_Game.FindAction("North", throwIfNotFound: true);
+        m_Game_South = m_Game.FindAction("South", throwIfNotFound: true);
+        m_Game_West = m_Game.FindAction("West", throwIfNotFound: true);
+        m_Game_Start = m_Game.FindAction("Start", throwIfNotFound: true);
+        m_Game_SL = m_Game.FindAction("SL", throwIfNotFound: true);
+        m_Game_SR = m_Game.FindAction("SR", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_DPad = m_UI.FindAction("DPad", throwIfNotFound: true);
@@ -864,25 +864,25 @@ public class @InputMap : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Game;
     private IGameActions m_GameActionsCallbackInterface;
     private readonly InputAction m_Game_Move;
-    private readonly InputAction m_Game_ButtonEast;
-    private readonly InputAction m_Game_ButtonNorth;
-    private readonly InputAction m_Game_ButtonSouth;
-    private readonly InputAction m_Game_ButtonWest;
-    private readonly InputAction m_Game_StartButton;
-    private readonly InputAction m_Game_ShoulderL;
-    private readonly InputAction m_Game_ShoulderR;
+    private readonly InputAction m_Game_East;
+    private readonly InputAction m_Game_North;
+    private readonly InputAction m_Game_South;
+    private readonly InputAction m_Game_West;
+    private readonly InputAction m_Game_Start;
+    private readonly InputAction m_Game_SL;
+    private readonly InputAction m_Game_SR;
     public struct GameActions
     {
         private @InputMap m_Wrapper;
         public GameActions(@InputMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Game_Move;
-        public InputAction @ButtonEast => m_Wrapper.m_Game_ButtonEast;
-        public InputAction @ButtonNorth => m_Wrapper.m_Game_ButtonNorth;
-        public InputAction @ButtonSouth => m_Wrapper.m_Game_ButtonSouth;
-        public InputAction @ButtonWest => m_Wrapper.m_Game_ButtonWest;
-        public InputAction @StartButton => m_Wrapper.m_Game_StartButton;
-        public InputAction @ShoulderL => m_Wrapper.m_Game_ShoulderL;
-        public InputAction @ShoulderR => m_Wrapper.m_Game_ShoulderR;
+        public InputAction @East => m_Wrapper.m_Game_East;
+        public InputAction @North => m_Wrapper.m_Game_North;
+        public InputAction @South => m_Wrapper.m_Game_South;
+        public InputAction @West => m_Wrapper.m_Game_West;
+        public InputAction @Start => m_Wrapper.m_Game_Start;
+        public InputAction @SL => m_Wrapper.m_Game_SL;
+        public InputAction @SR => m_Wrapper.m_Game_SR;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -895,27 +895,27 @@ public class @InputMap : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
-                @ButtonEast.started -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonEast;
-                @ButtonEast.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonEast;
-                @ButtonEast.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonEast;
-                @ButtonNorth.started -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonNorth;
-                @ButtonNorth.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonNorth;
-                @ButtonNorth.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonNorth;
-                @ButtonSouth.started -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonSouth;
-                @ButtonSouth.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonSouth;
-                @ButtonSouth.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonSouth;
-                @ButtonWest.started -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonWest;
-                @ButtonWest.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonWest;
-                @ButtonWest.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnButtonWest;
-                @StartButton.started -= m_Wrapper.m_GameActionsCallbackInterface.OnStartButton;
-                @StartButton.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnStartButton;
-                @StartButton.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnStartButton;
-                @ShoulderL.started -= m_Wrapper.m_GameActionsCallbackInterface.OnShoulderL;
-                @ShoulderL.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnShoulderL;
-                @ShoulderL.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnShoulderL;
-                @ShoulderR.started -= m_Wrapper.m_GameActionsCallbackInterface.OnShoulderR;
-                @ShoulderR.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnShoulderR;
-                @ShoulderR.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnShoulderR;
+                @East.started -= m_Wrapper.m_GameActionsCallbackInterface.OnEast;
+                @East.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnEast;
+                @East.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnEast;
+                @North.started -= m_Wrapper.m_GameActionsCallbackInterface.OnNorth;
+                @North.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnNorth;
+                @North.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnNorth;
+                @South.started -= m_Wrapper.m_GameActionsCallbackInterface.OnSouth;
+                @South.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnSouth;
+                @South.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnSouth;
+                @West.started -= m_Wrapper.m_GameActionsCallbackInterface.OnWest;
+                @West.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnWest;
+                @West.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnWest;
+                @Start.started -= m_Wrapper.m_GameActionsCallbackInterface.OnStart;
+                @Start.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnStart;
+                @Start.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnStart;
+                @SL.started -= m_Wrapper.m_GameActionsCallbackInterface.OnSL;
+                @SL.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnSL;
+                @SL.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnSL;
+                @SR.started -= m_Wrapper.m_GameActionsCallbackInterface.OnSR;
+                @SR.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnSR;
+                @SR.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnSR;
             }
             m_Wrapper.m_GameActionsCallbackInterface = instance;
             if (instance != null)
@@ -923,27 +923,27 @@ public class @InputMap : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @ButtonEast.started += instance.OnButtonEast;
-                @ButtonEast.performed += instance.OnButtonEast;
-                @ButtonEast.canceled += instance.OnButtonEast;
-                @ButtonNorth.started += instance.OnButtonNorth;
-                @ButtonNorth.performed += instance.OnButtonNorth;
-                @ButtonNorth.canceled += instance.OnButtonNorth;
-                @ButtonSouth.started += instance.OnButtonSouth;
-                @ButtonSouth.performed += instance.OnButtonSouth;
-                @ButtonSouth.canceled += instance.OnButtonSouth;
-                @ButtonWest.started += instance.OnButtonWest;
-                @ButtonWest.performed += instance.OnButtonWest;
-                @ButtonWest.canceled += instance.OnButtonWest;
-                @StartButton.started += instance.OnStartButton;
-                @StartButton.performed += instance.OnStartButton;
-                @StartButton.canceled += instance.OnStartButton;
-                @ShoulderL.started += instance.OnShoulderL;
-                @ShoulderL.performed += instance.OnShoulderL;
-                @ShoulderL.canceled += instance.OnShoulderL;
-                @ShoulderR.started += instance.OnShoulderR;
-                @ShoulderR.performed += instance.OnShoulderR;
-                @ShoulderR.canceled += instance.OnShoulderR;
+                @East.started += instance.OnEast;
+                @East.performed += instance.OnEast;
+                @East.canceled += instance.OnEast;
+                @North.started += instance.OnNorth;
+                @North.performed += instance.OnNorth;
+                @North.canceled += instance.OnNorth;
+                @South.started += instance.OnSouth;
+                @South.performed += instance.OnSouth;
+                @South.canceled += instance.OnSouth;
+                @West.started += instance.OnWest;
+                @West.performed += instance.OnWest;
+                @West.canceled += instance.OnWest;
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
+                @SL.started += instance.OnSL;
+                @SL.performed += instance.OnSL;
+                @SL.canceled += instance.OnSL;
+                @SR.started += instance.OnSR;
+                @SR.performed += instance.OnSR;
+                @SR.canceled += instance.OnSR;
             }
         }
     }
@@ -1085,13 +1085,13 @@ public class @InputMap : IInputActionCollection, IDisposable
     public interface IGameActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnButtonEast(InputAction.CallbackContext context);
-        void OnButtonNorth(InputAction.CallbackContext context);
-        void OnButtonSouth(InputAction.CallbackContext context);
-        void OnButtonWest(InputAction.CallbackContext context);
-        void OnStartButton(InputAction.CallbackContext context);
-        void OnShoulderL(InputAction.CallbackContext context);
-        void OnShoulderR(InputAction.CallbackContext context);
+        void OnEast(InputAction.CallbackContext context);
+        void OnNorth(InputAction.CallbackContext context);
+        void OnSouth(InputAction.CallbackContext context);
+        void OnWest(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
+        void OnSL(InputAction.CallbackContext context);
+        void OnSR(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

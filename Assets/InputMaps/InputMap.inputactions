@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ButtonEast",
+                    "name": "East",
                     "type": "Button",
                     "id": "1bbcff16-1342-463d-a403-f2fe60828bce",
                     "expectedControlType": "Button",
@@ -22,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ButtonNorth",
+                    "name": "North",
                     "type": "Button",
                     "id": "afc2d6c9-8708-4e31-b408-b3c5efe828bc",
                     "expectedControlType": "Button",
@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ButtonSouth",
+                    "name": "South",
                     "type": "Button",
                     "id": "4a5bf5a6-4c4b-4ab5-ac0b-f87b097df1a7",
                     "expectedControlType": "Button",
@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ButtonWest",
+                    "name": "West",
                     "type": "Button",
                     "id": "d4f6ff8f-916a-41ae-9822-6ddaa026d573",
                     "expectedControlType": "Button",
@@ -46,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "StartButton",
+                    "name": "Start",
                     "type": "Button",
                     "id": "13a2b447-da67-4855-a3ce-5919f0df68ae",
                     "expectedControlType": "Button",
@@ -54,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ShoulderL",
+                    "name": "SL",
                     "type": "Button",
                     "id": "563d8146-787a-48d9-9b4a-d91cc7f55753",
                     "expectedControlType": "Button",
@@ -62,7 +62,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ShoulderR",
+                    "name": "SR",
                     "type": "Button",
                     "id": "20221624-ab12-4a2f-8bbf-ff7cb0e1507e",
                     "expectedControlType": "Button",
@@ -232,7 +232,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ButtonWest",
+                    "action": "West",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -243,7 +243,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "StartButton",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -254,7 +254,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "StartButton",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -265,7 +265,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ShoulderL",
+                    "action": "SL",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -276,7 +276,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "ShoulderL",
+                    "action": "SL",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -287,7 +287,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ButtonEast",
+                    "action": "East",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -298,7 +298,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "ButtonEast",
+                    "action": "East",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -309,7 +309,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ButtonSouth",
+                    "action": "South",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -320,7 +320,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "ButtonSouth",
+                    "action": "South",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -331,7 +331,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ButtonNorth",
+                    "action": "North",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -342,7 +342,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ShoulderR",
+                    "action": "SR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -353,7 +353,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "ShoulderR",
+                    "action": "SR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

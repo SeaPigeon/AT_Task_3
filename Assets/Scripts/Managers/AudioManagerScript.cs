@@ -28,11 +28,8 @@ public class AudioManagerScript : MonoBehaviour
 
     // Getters & Setters
     public AudioSource AudioSourceInstance { get { return _audioSourceInstance; } set { _audioSourceInstance = value; } }
-    
-
     public AudioClip[] GameMusicList {get { return _gameMusic; } }
     public AudioClip[] GameSFXList { get { return _gameSFX; } }
-
     public AudioClip CurrentAudioClipLoaded { get { return _currentAudioClipLoaded; } set { _currentAudioClipLoaded = value; } }
     public bool AudioClipPlaying { get { return _audioClipPlaying; } set { _audioClipPlaying = value; } }
 
@@ -56,7 +53,6 @@ public class AudioManagerScript : MonoBehaviour
         _gameManager.CurrentAudioClipLoaded = _audioSourceInstance.clip;
         _gameManager.AudioClipPlaying = _audioSourceInstance.isPlaying;
     }
-
     public void PlayMusic(AudioSource ASource, int clipIndex)
     {
         if ((!ASource.isPlaying) || 

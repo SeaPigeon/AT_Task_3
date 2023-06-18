@@ -31,6 +31,10 @@ public class GameManagerScript : MonoBehaviour
     void Awake()
     {
         GameManagerSingleton();
+        
+    }
+    void Start()
+    {
         SetUpGameManager();
         ResetScore();
     }
@@ -65,10 +69,13 @@ public class GameManagerScript : MonoBehaviour
     }
     private void SetUpGameManager()
     {
+        //GameManagerDebugLog();
         ActiveScene = SceneManager.GetActiveScene();
         ActiveSceneName = ActiveScene.name;
         SceneLoadedIndex = ActiveScene.buildIndex;
+        //GameManagerDebugLog();
         SetGameState();
+        //GameManagerDebugLog();
     }
     public void SetGameState()
     {

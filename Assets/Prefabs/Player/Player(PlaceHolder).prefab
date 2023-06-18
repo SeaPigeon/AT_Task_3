@@ -202,7 +202,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6487002628642579694}
   - component: {fileID: 6487002628642579695}
-  - component: {fileID: 6487002628642579692}
+  - component: {fileID: 5274174278002900935}
+  - component: {fileID: 5136519633811352414}
   m_Layer: 0
   m_Name: Player(PlaceHolder)
   m_TagString: Untagged
@@ -239,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: ef386c43a308eb34492151e45ce83add, type: 3}
   m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
+  m_UIInputModule: {fileID: 7078451248553243759, guid: 9c69dc2b1319b474d91a4d90b5d1c4ad, type: 3}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -249,13 +250,77 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 712f66d1-4f15-4141-a0da-606fd8b31c73
+    m_ActionName: Game/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1bbcff16-1342-463d-a403-f2fe60828bce
+    m_ActionName: Game/East[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: afc2d6c9-8708-4e31-b408-b3c5efe828bc
+    m_ActionName: Game/North
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a5bf5a6-4c4b-4ab5-ac0b-f87b097df1a7
+    m_ActionName: Game/South[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d4f6ff8f-916a-41ae-9822-6ddaa026d573
+    m_ActionName: Game/West
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 13a2b447-da67-4855-a3ce-5919f0df68ae
+    m_ActionName: Game/Start[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 563d8146-787a-48d9-9b4a-d91cc7f55753
+    m_ActionName: Game/SL[/Keyboard/leftCtrl]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 20221624-ab12-4a2f-8bbf-ff7cb0e1507e
+    m_ActionName: Game/SR[/Keyboard/rightCtrl]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9566bc38-b2b2-4550-afd0-92b7b2de927c
+    m_ActionName: UI/DPad[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 39c654cc-2a66-40ac-874f-0fc6c4d80207
+    m_ActionName: UI/ButtonEast[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cc833844-3b1e-4dd3-a2e5-340b3a6eed26
+    m_ActionName: UI/ButtonNorth
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 745075cb-5088-4441-8de4-f27a603ee83c
+    m_ActionName: UI/ButtonSouth[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5446d1c4-14bd-4017-8148-53ad1c889b3f
+    m_ActionName: UI/ButtonWest
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 867f3ebc-8438-4c59-9724-7ac188cf673e
+    m_ActionName: UI/StartButton[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: adc345b4-3421-420e-98c8-f5154523d397
+    m_ActionName: UI/ShoulderL[/Keyboard/leftCtrl]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 26f6181e-6588-47b1-a3d0-019bbd020898
+    m_ActionName: UI/ShoulderR[/Keyboard/rightCtrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Game
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &6487002628642579692
+  m_Camera: {fileID: 1894830939709090301, guid: 11faee1c68e3d2f40bce3c65cdfdabbc, type: 3}
+--- !u!114 &5274174278002900935
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -264,37 +329,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 6487002628642579693}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 10819bebf9c942f4c9f2f222b2073682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 0
-  m_MaxPlayerCount: -1
-  m_AllowJoining: 1
-  m_JoinBehavior: 0
-  m_PlayerJoinedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_PlayerLeftEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_JoinAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: 
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-    m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 6487002628642579693}
-  m_SplitScreen: 0
-  m_MaintainAspectRatioInSplitScreen: 0
-  m_FixedNumberOfSplitScreens: -1
-  m_SplitScreenRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+  _currentHealth: 0
+  _moveSpeed: 0
+  _runSpeed: 0
+  _fireDelay: 0
+  _sceneToLoadOnDeath: 
+  _gameManager: {fileID: 0}
+  _sceneManager: {fileID: 0}
+  _inputManager: {fileID: 0}
+--- !u!143 &5136519633811352414
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6487002628642579693}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
