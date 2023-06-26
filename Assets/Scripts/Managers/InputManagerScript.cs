@@ -3,13 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InputManagerScript : MonoBehaviour
 {
     private static InputManagerScript _inputManagerInstance = null;
 
     private InputMap _inputMap;
-    private GameManagerScript _gameManager;
+    [SerializeField]private InputActionMap _activeInputMap;
+    //private GameManagerScript _gameManager;
+    //private SceneManagerScript _sceneManager;
+    //private UIManagerScript _UIManager;
 
     [SerializeField] Vector2 _dPadInput;
     [SerializeField] bool _buttonSouthInput;
@@ -29,8 +33,7 @@ public class InputManagerScript : MonoBehaviour
 
     private void Start()
     {
-        SetUpReferences();
-        SetUpInputMap();
+        SetUpStartingInputMap();
         SubscribeUIInputs();
         SubscribeToEvents();
     }
@@ -45,6 +48,7 @@ public class InputManagerScript : MonoBehaviour
     public bool ShoulderLInput { get { return _shoulderLInput; } set { _shoulderLInput = value; } }
     public bool StartInput { get { return _startInput; } set { _startInput = value; } }
     public InputMap InputMap {get { return _inputMap; } }
+    public InputActionMap ActiveInputMap { get { return _activeInputMap; } set { _activeInputMap = value; } }
 
     // Methods
     private void InputManagerSingleton()
@@ -60,15 +64,11 @@ public class InputManagerScript : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    private void SetUpReferences()
-    {
-        _gameManager = FindObjectOfType<GameManagerScript>();
-    }
-    private void SetUpInputMap()
+    public void SetUpStartingInputMap()
     {
         _inputMap = new InputMap();
 
-        if(_gameManager.ActiveGameState == GameState.InGame)
+        if (SceneManager.GetActiveScene().buildIndex == 4)
         {
             ActivateInputMap(_inputMap.Game);
         }
@@ -77,10 +77,12 @@ public class InputManagerScript : MonoBehaviour
             ActivateInputMap(_inputMap.UI);
         }
     }
-    private void SubscribeUIInputs()
+    public void SubscribeUIInputs()
     {
+        //_player.UnsubscribeGameInputs();
+
         _inputMap.UI.DPad.started += OnDpad;
-        _inputMap.UI.ButtonSouth.performed += OnButtonSouth;
+        //_inputMap.UI.ButtonSouth.started += OnButtonSouth;
         _inputMap.UI.ButtonWest.performed += OnButtonWest;
         _inputMap.UI.ButtonNorth.performed += OnButtonNorth;
         _inputMap.UI.ButtonEast.performed += OnButtonEast;
@@ -89,7 +91,7 @@ public class InputManagerScript : MonoBehaviour
         _inputMap.UI.StartButton.performed += OnStart;
 
         //_inputMap.UI.DPad.canceled += OnDpad;
-        //_inputMap.UI.ButtonSouth.canceled += OnButtonSouth;
+        _inputMap.UI.ButtonSouth.canceled += OnButtonSouth;
         //_inputMap.UI.ButtonWest.canceled += OnButtonWest;
         //_inputMap.UI.ButtonNorth.canceled += OnButtonNorth;
         //_inputMap.UI.ButtonEast.canceled += OnButtonEast;
@@ -97,6 +99,7 @@ public class InputManagerScript : MonoBehaviour
         //_inputMap.UI.ShoulderL.canceled += OnShoulderL;
         //_inputMap.UI.StartButton.canceled += OnStart;
     }
+
     private void SubscribeToEvents()
     {
         OnInputMapTransitionEvent += ActivateInputMap;
@@ -105,26 +108,29 @@ public class InputManagerScript : MonoBehaviour
     {
         _inputMap.Disable();
         map.Enable();
-
-        Debug.Log("2 UI Map Active:" + _inputMap.UI.enabled);
-        Debug.Log("2 Game Map Active:" + _inputMap.Game.enabled + "\n");
+        _activeInputMap = map;
     }
 
     // UI Inputs Functions
     private void OnDpad(InputAction.CallbackContext context) 
     {
         //DPadInput = context.ReadValue<Vector2>();
-        Debug.Log("DPadUI");
+        Debug.Log("DPadUI Input Log");
     }
     private void OnButtonSouth(InputAction.CallbackContext context) 
     {
-        //ButtonSouthInput = context.ReadValueAsButton();
-        Debug.Log("SouthUI");
+        /*if (_gameManager.ActiveSceneName == "DebugScene" && context.phase == InputActionPhase.Canceled)
+        {
+            _sceneManager.OnLoadScene("MainMenu");
+            _UIManager.LoadCanvas(1);
+            Debug.Log("SouthUI Input Debug -> Main Menu");
+        }*/
+        Debug.Log("SouthUI Input Log");
     }
     private void OnButtonWest(InputAction.CallbackContext context) 
     {
         //ButtonWestInput = context.ReadValueAsButton();
-        Debug.Log("WstUI");
+        Debug.Log("WestUI");
     }
     private void OnButtonNorth(InputAction.CallbackContext context) 
     {

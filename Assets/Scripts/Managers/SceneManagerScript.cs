@@ -9,11 +9,12 @@ public class SceneManagerScript : MonoBehaviour
 {
     Scene _activeScene;
 
-    public event Action<string, int> OnSceneTransitionEvent;
+    public event Action<string> LoadSceneEvent;
     
     private static SceneManagerScript _SceneManagerInstance;
     [SerializeField] private GameManagerScript _gameManager;
-    [SerializeField] private UIManagerScript _uiManager;
+    [SerializeField] private InputManagerScript _inputManager;
+    [SerializeField] private PlayerScript _player;
 
     // Main
     private void Awake()
@@ -24,10 +25,6 @@ public class SceneManagerScript : MonoBehaviour
     {
         SetUpReferences();
         SubscribeToEvents();
-    }
-    private void Update() {
-        //Debug.Log(ActiveScene.name);
-        
     }
 
     // Getters & Setters
@@ -50,24 +47,18 @@ public class SceneManagerScript : MonoBehaviour
     private void SetUpReferences()
     {
         _gameManager = FindObjectOfType<GameManagerScript>();
-        _uiManager = FindObjectOfType<UIManagerScript>();
+        _inputManager = FindObjectOfType<InputManagerScript>();
+        _player = FindObjectOfType<PlayerScript>();
     }
     private void SubscribeToEvents()
     {
-        OnSceneTransitionEvent += LoadScene;
+        LoadSceneEvent += LoadScene;
         SceneManager.sceneLoaded += SetActiveScene;
     }
     
-    public void LoadScene(string sceneName, int canvasIndex)
+    public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
-        /*ActiveScene = SceneManager.GetActiveScene();
-        _gameManager.ActiveScene = ActiveScene;
-        _gameManager.ActiveSceneName = ActiveScene.name;
-        _gameManager.SceneLoadedIndex = ActiveScene.buildIndex;
-        _gameManager.SetGameState();*/
-        //Debug.Log(_gameManager.ActiveGameState);
-        _uiManager.LoadCanvas(canvasIndex);
+        SceneManager.LoadSceneAsync(sceneName);
     }
 
     void SetActiveScene(Scene scene, LoadSceneMode mode)
@@ -77,11 +68,23 @@ public class SceneManagerScript : MonoBehaviour
         _gameManager.ActiveSceneName = ActiveScene.name;
         _gameManager.SceneLoadedIndex = ActiveScene.buildIndex;
         _gameManager.SetGameState();
+        if (_gameManager.ActiveGameState == GameState.InGame)
+        {
+            _inputManager.ActivateInputMap(_inputManager.InputMap.Game);
+            _player.SpawnPlayer();
+        }
+        else
+        {
+            _inputManager.ActivateInputMap(_inputManager.InputMap.UI);
+            _player.TogglePlayerMesh(false);
+        }
+        
+        Debug.Log("SceneManager LoadScene/OnLoadScene: " + SceneManager.GetActiveScene().name);
     }
     
     // Events
-    public void OnLoadSceneEvent(string sceneName, int canvasIndex)
+    public void OnLoadScene(string sceneName)
     {
-        OnSceneTransitionEvent?.Invoke(sceneName, canvasIndex);
+        LoadSceneEvent?.Invoke(sceneName);
     }
 }

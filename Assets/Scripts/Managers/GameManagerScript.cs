@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public enum GameState
 public class GameManagerScript : MonoBehaviour
 {
     [Header("Game Variables")]
+    [SerializeField] PlayerScript _player;
     private Scene _activeScene;
     [SerializeField] string _activeSceneName;
     [SerializeField] int _sceneLoadedIndex;
@@ -35,6 +37,7 @@ public class GameManagerScript : MonoBehaviour
     }
     void Start()
     {
+        SetUpReferences();
         SetUpGameManager();
         ResetScore();
     }
@@ -67,15 +70,16 @@ public class GameManagerScript : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    private void SetUpGameManager()
+    private void SetUpReferences()
     {
-        //GameManagerDebugLog();
+        _player = FindObjectOfType<PlayerScript>();
+    }
+    void SetUpGameManager()
+    {
         ActiveScene = SceneManager.GetActiveScene();
         ActiveSceneName = ActiveScene.name;
         SceneLoadedIndex = ActiveScene.buildIndex;
-        //GameManagerDebugLog();
         SetGameState();
-        //GameManagerDebugLog();
     }
     public void SetGameState()
     {

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &798042637753171586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417414289227952468}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &417414289227952468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798042637753171586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6487002628642579694}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2977631219152023764
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +138,6 @@ GameObject:
   - component: {fileID: 358440890602991157}
   - component: {fileID: 3974973764716052699}
   - component: {fileID: 7661596758771192529}
-  - component: {fileID: 4218393244039561948}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -123,13 +152,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3659185534277017939}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.433, y: 0.452, z: 0}
+  m_LocalRotation: {x: -0, y: -0.70710707, z: -0, w: 0.70710653}
+  m_LocalPosition: {x: 0, y: 0.45200002, z: 0.45}
   m_LocalScale: {x: 0.15547, y: 0.17447, z: 0.5559154}
   m_Children: []
   m_Father: {fileID: 2460632717377227207}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &3974973764716052699
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -179,19 +208,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4218393244039561948
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3659185534277017939}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6487002628642579693
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +219,7 @@ GameObject:
   - component: {fileID: 6487002628642579694}
   - component: {fileID: 6487002628642579695}
   - component: {fileID: 5274174278002900935}
-  - component: {fileID: 5136519633811352414}
+  - component: {fileID: 4052277301284392890}
   m_Layer: 0
   m_Name: Player(PlaceHolder)
   m_TagString: Untagged
@@ -223,6 +239,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2460632717377227207}
+  - {fileID: 417414289227952468}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -239,8 +256,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: ef386c43a308eb34492151e45ce83add, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 7078451248553243759, guid: 9c69dc2b1319b474d91a4d90b5d1c4ad, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -333,14 +350,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHealth: 0
-  _moveSpeed: 0
+  _moveSpeed: 10
   _runSpeed: 0
-  _fireDelay: 0
+  _rotationSpeed: 120
+  _fireDelay: 0.5
   _sceneToLoadOnDeath: 
+  _firePoint: {fileID: 798042637753171586}
+  _bullet: {fileID: 4526600735577868852, guid: f598ead3499bf8b41bad31059810b69b, type: 3}
+  _playerCC: {fileID: 0}
+  _movementInput: {x: 0, y: 0}
+  _rotateInput: {x: 0, y: 0}
+  _fireInput: 0
   _gameManager: {fileID: 0}
   _sceneManager: {fileID: 0}
   _inputManager: {fileID: 0}
---- !u!143 &5136519633811352414
+  _UIManager: {fileID: 0}
+  _playerMesh: {fileID: 6495708630564321639}
+  _spawnPoint: {fileID: 0}
+--- !u!143 &4052277301284392890
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -357,4 +384,4 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
