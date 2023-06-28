@@ -246,6 +246,17 @@
                 },
                 {
                     "name": "",
+                    "id": "60a6c2a9-07d2-4c78-8a57-80b604ad52d5",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "West",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6e90c5a3-7789-4396-bf17-271d0dddc72d",
                     "path": "<Gamepad>/start",
                     "interactions": "",
@@ -280,7 +291,7 @@
                 {
                     "name": "",
                     "id": "197697d3-1a59-4988-b061-b939e25aef1d",
-                    "path": "<Keyboard>/leftCtrl",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -346,7 +357,7 @@
                 {
                     "name": "",
                     "id": "7d3eaed8-fdfa-45d1-95ed-0002cb6727ae",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",

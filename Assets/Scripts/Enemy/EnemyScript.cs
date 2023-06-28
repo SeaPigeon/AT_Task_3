@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] int _MAX_HEALTH = 100;
     [SerializeField] int _currentHealth;
     [SerializeField] int _damage;
+    [SerializeField] int _score;
+    [SerializeField] GameManagerScript _gameManager;
 
     void Start()
     {
+        SetUpReferences();
         ResetEnemy();
     }
 
@@ -18,6 +22,11 @@ public class EnemyScript : MonoBehaviour
         
     }
 
+    private void SetUpReferences()
+    {
+        _gameManager = FindObjectOfType<GameManagerScript>();
+    }
+    
     public void ResetEnemy()
     {
         _currentHealth = _MAX_HEALTH;
@@ -27,6 +36,7 @@ public class EnemyScript : MonoBehaviour
         _currentHealth -= dmg;
         if (_currentHealth <= 0)
         {
+            _gameManager.ChangeScore(_score);
             Destroy(gameObject);
         }
     }

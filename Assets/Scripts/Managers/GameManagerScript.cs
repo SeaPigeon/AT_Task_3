@@ -22,13 +22,13 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] int _sceneLoadedIndex;
     [SerializeField] GameObject _activeCanvas;
     [SerializeField] GameState _activeGameState;
-    [SerializeField] CinemachineVirtualCamera _activeCamera;
+    [SerializeField] Camera _activeCamera;
     [SerializeField] AudioClip _currentAudioClipLoaded;
     [SerializeField] bool _audioClipPlaying;
     
     [SerializeField] int _score;
 
-    private static GameManagerScript _instance = null;
+    private static GameManagerScript _gameManagerInstance = null;
 
     void Awake()
     {
@@ -43,7 +43,7 @@ public class GameManagerScript : MonoBehaviour
     }
 
     // Getters && Setters
-    public GameManagerScript GameManagerInstance { get { return _instance; } }
+    public static GameManagerScript GMInstance { get { return _gameManagerInstance; } }
 
     // G&S States
     public Scene ActiveScene { get { return _activeScene; } set { _activeScene = value; } }
@@ -51,7 +51,7 @@ public class GameManagerScript : MonoBehaviour
     public int SceneLoadedIndex { get { return _sceneLoadedIndex; } set { _sceneLoadedIndex = value; } }
     public GameObject ActiveCanvas { get { return _activeCanvas; } set { _activeCanvas = value; } }
     public GameState ActiveGameState { get { return _activeGameState; } set { _activeGameState = value; } }
-    public CinemachineVirtualCamera ActiveCamera {get { return _activeCamera; } set { _activeCamera = value; } }
+    public Camera ActiveCamera {get { return _activeCamera; } set { _activeCamera = value; } }
     public AudioClip CurrentAudioClipLoaded { get { return _currentAudioClipLoaded; } set { _currentAudioClipLoaded = value; } }
     public bool AudioClipPlaying { get { return _audioClipPlaying; } set { _audioClipPlaying = value; } }
     public int Score { get { return _score; } set { _score = value; } }
@@ -59,11 +59,11 @@ public class GameManagerScript : MonoBehaviour
     // Methods
     private void GameManagerSingleton()
     {
-        if (_instance == null)
+        if (_gameManagerInstance == null)
         {
-            _instance = this;
+            _gameManagerInstance = this;
         }
-        else if (_instance != this)
+        else if (_gameManagerInstance != this)
         {
             Destroy(gameObject);
         }
@@ -99,7 +99,9 @@ public class GameManagerScript : MonoBehaviour
         {
             ActiveGameState = GameState.InEditor;
         }
-        else if (ActiveScene.name == "Level_1")
+        else if (ActiveScene.name == "Level_1" || 
+                 ActiveScene.name == "Level_2" ||
+                 ActiveScene.name == "Level_3")
         {
             ActiveGameState = GameState.InGame;
         }

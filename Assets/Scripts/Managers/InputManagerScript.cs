@@ -39,6 +39,7 @@ public class InputManagerScript : MonoBehaviour
     }
 
     // Getters & Setters
+    public static InputManagerScript IMInstance { get { return _inputManagerInstance; } }
     public Vector2 DPadInput { get { return _dPadInput; } set { _dPadInput = value; } }
     public bool ButtonSouthInput { get { return _buttonSouthInput; } set { _buttonSouthInput = value; } }
     public bool ButtonWestInput { get { return _buttonWestInput; } set { _buttonWestInput = value; } }
@@ -68,7 +69,9 @@ public class InputManagerScript : MonoBehaviour
     {
         _inputMap = new InputMap();
 
-        if (SceneManager.GetActiveScene().buildIndex == 4)
+        if (SceneManager.GetActiveScene().buildIndex == 4 ||
+            SceneManager.GetActiveScene().buildIndex == 5 || 
+            SceneManager.GetActiveScene().buildIndex == 6) 
         {
             ActivateInputMap(_inputMap.Game);
         }

@@ -28,6 +28,7 @@ public class UIManagerScript : MonoBehaviour
     }
 
     // Getter & Setters
+    public static UIManagerScript UIMInstance { get { return _UIManagerInstance; } }
     public GameObject ActiveCanvas { get { return _activeCanvas; } set { _activeCanvas = value; } }
    
    // Methods
@@ -57,7 +58,29 @@ public class UIManagerScript : MonoBehaviour
             item.SetActive(false);
         }
 
-        LoadCanvas(SceneManager.GetActiveScene().buildIndex); 
+        //LoadCanvas(SceneManager.GetActiveScene().buildIndex);
+        if (SceneManager.GetActiveScene().name == "DebugScene")
+        {
+            LoadCanvas(0);
+        }
+        else if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            LoadCanvas(1);
+        }
+        else if (SceneManager.GetActiveScene().name == "ControlsMenu")
+        {
+            LoadCanvas(2);
+        }
+        else if (SceneManager.GetActiveScene().name == "LevelEditor")
+        {
+            LoadCanvas(3);
+        }
+        else if (SceneManager.GetActiveScene().name == "Level_1" ||
+                SceneManager.GetActiveScene().name == "Level_2" || 
+                SceneManager.GetActiveScene().name == "Level_3")
+        {
+            LoadCanvas(4);
+        }
     }
     public void SetUpEventSystem()
     {

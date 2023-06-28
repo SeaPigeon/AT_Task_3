@@ -130,6 +130,8 @@ MonoBehaviour:
   _bulletLifeSpan: 2
   _bulletSpeed: 15
   _bulletDamage: 40
+  _currentAmmo: 10000
+  _fireDelay: 0
   _bulletRB: {fileID: 0}
 --- !u!114 &5853179621707226871
 MonoBehaviour:

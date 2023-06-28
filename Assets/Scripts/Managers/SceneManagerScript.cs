@@ -28,6 +28,7 @@ public class SceneManagerScript : MonoBehaviour
     }
 
     // Getters & Setters
+    public static SceneManagerScript SMInstance { get { return _SceneManagerInstance; } }
     public Scene ActiveScene { get { return _activeScene; } set { _activeScene = value; } }
 
     // Methods
@@ -68,7 +69,9 @@ public class SceneManagerScript : MonoBehaviour
         _gameManager.ActiveSceneName = ActiveScene.name;
         _gameManager.SceneLoadedIndex = ActiveScene.buildIndex;
         _gameManager.SetGameState();
-        if (_gameManager.ActiveGameState == GameState.InGame)
+        if (SceneManager.GetActiveScene().buildIndex == 4 ||
+            SceneManager.GetActiveScene().buildIndex == 5 ||
+            SceneManager.GetActiveScene().buildIndex == 6)
         {
             _inputManager.ActivateInputMap(_inputManager.InputMap.Game);
             _player.SpawnPlayer();
@@ -76,7 +79,7 @@ public class SceneManagerScript : MonoBehaviour
         else
         {
             _inputManager.ActivateInputMap(_inputManager.InputMap.UI);
-            _player.TogglePlayerMesh(false);
+            _player.TogglePlayerSprite(false);
         }
         
         Debug.Log("SceneManager LoadScene/OnLoadScene: " + SceneManager.GetActiveScene().name);

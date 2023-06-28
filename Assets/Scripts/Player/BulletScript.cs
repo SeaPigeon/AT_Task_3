@@ -8,11 +8,18 @@ public class BulletScript : MonoBehaviour
     [SerializeField] float _bulletLifeSpan;
     [SerializeField] float _bulletSpeed;
     [SerializeField] int _bulletDamage;
+    [SerializeField] int _currentAmmo;
+    [SerializeField] float _fireDelay;
+    [SerializeField] Sprite _weaponSprite;
 
     [Header("Debug")]
     [SerializeField] Rigidbody _bulletRB;
 
     public int BulletDamage { get { return _bulletDamage; } set { _bulletDamage = value; } }
+    public int Ammo { get { return _currentAmmo; } set {_currentAmmo = value; } }
+    public float FireDelay { get { return _fireDelay; } set { _fireDelay = value; } }
+    public Sprite WeaponSprite { get { return _weaponSprite; } }
+
     private void Awake()
     {
         _bulletRB = gameObject.GetComponent<Rigidbody>();
@@ -27,6 +34,11 @@ public class BulletScript : MonoBehaviour
     private void MoveBullet()
     {
         _bulletRB.velocity = transform.forward * _bulletSpeed;
+    }
+
+    public void Reload(int ammo)
+    {
+        _currentAmmo += ammo;
     }
 
     IEnumerator DestroyBullet()

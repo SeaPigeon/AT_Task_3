@@ -11,7 +11,7 @@ public class AudioManagerScript : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private AudioClip _currentAudioClipLoaded;
     [SerializeField] private bool _audioClipPlaying;
-    [SerializeField] private AudioSource _audioSourceInstance;
+    [SerializeField] private static AudioSource _audioSourceInstance;
 
     private static AudioManagerScript _audioManagerInstance = null;
     private GameManagerScript _gameManager;
@@ -27,6 +27,7 @@ public class AudioManagerScript : MonoBehaviour
     }
 
     // Getters & Setters
+    public static AudioManagerScript AMInstance { get { return _audioManagerInstance; } } 
     public AudioSource AudioSourceInstance { get { return _audioSourceInstance; } set { _audioSourceInstance = value; } }
     public AudioClip[] GameMusicList {get { return _gameMusic; } }
     public AudioClip[] GameSFXList { get { return _gameSFX; } }
