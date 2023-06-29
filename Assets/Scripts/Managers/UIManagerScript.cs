@@ -23,8 +23,7 @@ public class UIManagerScript : MonoBehaviour
     private void Start()
     {
         SetUpReferences();
-        SetUpStartingCanvas();
-        SetUpEventSystem();
+        SubscribeToEvents();
     }
 
     // Getter & Setters
@@ -47,8 +46,12 @@ public class UIManagerScript : MonoBehaviour
     }   
     private void SetUpReferences() 
     {
-        _gameManager = FindObjectOfType<GameManagerScript>();
+        _gameManager = GameManagerScript.GMInstance;
         _eventSystem = gameObject.GetComponentInChildren<EventSystem>();
+    }
+    private void SubscribeToEvents()
+    {
+        _gameManager.OnGMSetUpComplete += SetUpStartingCanvas;
     }
     
     public void SetUpStartingCanvas()
@@ -57,34 +60,38 @@ public class UIManagerScript : MonoBehaviour
         {
             item.SetActive(false);
         }
-
-        //LoadCanvas(SceneManager.GetActiveScene().buildIndex);
-        if (SceneManager.GetActiveScene().name == "DebugScene")
+ 
+        if (_gameManager.SceneLoadedIndex == 0)
         {
             LoadCanvas(0);
         }
-        else if (SceneManager.GetActiveScene().name == "MainMenu")
+        else if (_gameManager.SceneLoadedIndex == 1)
         {
             LoadCanvas(1);
         }
-        else if (SceneManager.GetActiveScene().name == "ControlsMenu")
+        else if (_gameManager.SceneLoadedIndex == 2)
         {
             LoadCanvas(2);
         }
-        else if (SceneManager.GetActiveScene().name == "LevelEditor")
+        else if (_gameManager.SceneLoadedIndex == 3)
         {
             LoadCanvas(3);
         }
-        else if (SceneManager.GetActiveScene().name == "Level_1" ||
-                SceneManager.GetActiveScene().name == "Level_2" || 
-                SceneManager.GetActiveScene().name == "Level_3")
+        else if (_gameManager.SceneLoadedIndex == 4 ||
+                 _gameManager.SceneLoadedIndex == 5 ||
+                 _gameManager.SceneLoadedIndex == 6)
         {
             LoadCanvas(4);
         }
+        else if (_gameManager.SceneLoadedIndex == 7)
+        {
+            LoadCanvas(5);
+        }
+        Debug.Log("CanvasLoadedFromGMEvent: " + _activeCanvas.name);
     }
     public void SetUpEventSystem()
     {
-        _eventSystem.SetSelectedGameObject(ActiveCanvas.GetComponent<RectTransform>().GetChild(0).gameObject);
+        _eventSystem.SetSelectedGameObject(ActiveCanvas.GetComponent<RectTransform>().GetChild(1).gameObject);
     }   
 
     // Public Methods
@@ -92,14 +99,12 @@ public class UIManagerScript : MonoBehaviour
     {
         if (ActiveCanvas != null) 
         {
-            _activeCanvas.SetActive(false);
+            ActiveCanvas.SetActive(false);
         }
         _canvasList[canvasIndex].SetActive(true);
         ActiveCanvas = _canvasList[canvasIndex];
+        SetUpEventSystem();
         _gameManager.ActiveCanvas = ActiveCanvas;
-
-        _eventSystem.SetSelectedGameObject(ActiveCanvas.GetComponent<RectTransform>().GetChild(0).gameObject);
-        
     }
 
 }

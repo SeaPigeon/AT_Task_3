@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] int _MAX_HEALTH = 100;
     [SerializeField] int _currentHealth;
     [SerializeField] int _damage;
-    [SerializeField] int _score;
+    [SerializeField] int _pointValue;
     [SerializeField] GameManagerScript _gameManager;
 
     void Start()
@@ -36,7 +36,8 @@ public class EnemyScript : MonoBehaviour
         _currentHealth -= dmg;
         if (_currentHealth <= 0)
         {
-            _gameManager.ChangeScore(_score);
+            GameManagerScript.GMInstance.ChangeScore(_pointValue);
+            Debug.Log(_pointValue);
             Destroy(gameObject);
         }
     }

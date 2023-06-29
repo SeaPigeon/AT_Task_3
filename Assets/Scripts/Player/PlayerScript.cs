@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] bool _hasRedKeycard;
     [SerializeField] bool _hasBlueKeycard;
     [SerializeField] bool _hasYellowKeycard;
+    [SerializeField] CinemachineVirtualCamera _gameCam;
 
     private int _activeWeaponIndex;
     private float _lastBulletTime;
@@ -42,7 +43,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameManagerScript _gameManager;
     [SerializeField] SceneManagerScript _sceneManager;
     [SerializeField] InputManagerScript _inputManager;
-    [SerializeField] UIManagerScript _UIManager;
+
     [SerializeField] SpriteRenderer _playerSprite;
     //[SerializeField] Transform _spawnPoint;
     [SerializeField] bool _isStrafing;
@@ -58,6 +59,7 @@ public class PlayerScript : MonoBehaviour
     public bool HasRedKeycard { get { return _hasRedKeycard; } set { _hasRedKeycard = value; } }
     public bool HasBlueKeycard { get { return _hasBlueKeycard; } set { _hasBlueKeycard = value; } }
     public bool HasYellowKeycard { get { return _hasYellowKeycard; } set { _hasYellowKeycard = value; } }
+    public CinemachineVirtualCamera InGameCamera { get { return _gameCam; } }
 
     private void Awake() 
     {
@@ -66,8 +68,10 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         SetUpReferences();
-        SetUpPlayer();
-        SubscribeGameInputs();
+        SetUpEvents();
+        ResetPlayer();
+        //SetUpPlayer();
+        //SubscribeGameInputs();
     }
 
     private void Update()
@@ -98,24 +102,17 @@ public class PlayerScript : MonoBehaviour
     }
     private void SetUpReferences()
     {
-        _gameManager = FindObjectOfType<GameManagerScript>();
-        _inputManager = FindObjectOfType<InputManagerScript>();
-        _sceneManager = FindObjectOfType<SceneManagerScript>();
-        _UIManager = FindObjectOfType<UIManagerScript>();
+        _gameManager = GameManagerScript.GMInstance;
+        _inputManager = InputManagerScript.IMInstance;
+        _sceneManager = SceneManagerScript.SMInstance;
         _playerSprite = GetComponentInChildren<SpriteRenderer>();
         _playerCC = gameObject.GetComponent<CharacterController>();
-        /*if (FindObjectOfType<SpawnPointScript>())
-        {
-            _spawnPoint = FindObjectOfType<SpawnPointScript>().transform;
-        }
-        else
-        {
-            _spawnPoint.position = Vector3.zero;
-            _spawnPoint.rotation = Quaternion.Euler(0, 0, 0);
-            _spawnPoint.localScale = Vector3.zero;
-        }*/
     }
-    private void SubscribeGameInputs()
+    private void SetUpEvents()
+    {
+        _gameManager.OnGMSetUpComplete += SetUpPlayer;
+    }
+    public void SubscribeGameInputs()
     {
         _inputManager.InputMap.Game.Move.performed += OnMove;
         _inputManager.InputMap.Game.South.started += OnSouth;
@@ -135,39 +132,43 @@ public class PlayerScript : MonoBehaviour
         _inputManager.InputMap.Game.SL.canceled += OnSL;
         //_inputManager.InputMap.Game.Start.canceled += OnStart;
     }
-
-    private void SetUpPlayer()
+    public void SetUpPlayer()
     {
-        CurrentHealth = _MAX_HEALTH;
-        _gameManager.ResetScore();
+        
+        //SubscribeGameInputs();
+
         _activeWeapon = _weaponList[0].gameObject;
         _activeWeaponIndex = 0;
         _fireDelay = _weaponList[0].GetComponent<BulletScript>().FireDelay;
-        SetUpStartingAmmo(10, 0, 0);
         ActivateWeapon(0);
         _isStrafing = false;
         _hasRedKeycard = false;
         _hasBlueKeycard = false;
         _hasYellowKeycard = false;
-        if (SceneManager.GetActiveScene().buildIndex == 4 ||
-            SceneManager.GetActiveScene().buildIndex == 5 ||
-            SceneManager.GetActiveScene().buildIndex == 6)
+
+        if (_gameManager.SceneLoadedIndex == 4 ||
+            _gameManager.SceneLoadedIndex == 5 ||
+            _gameManager.SceneLoadedIndex == 6)
         {
-            Debug.Log(gameObject.transform.position);
+
             SpawnPlayer();
-            Debug.Log("Spawn");
+            Debug.Log("Player Spawned from GMEvent: " + transform.position);
         }
         else
         {
-            Debug.Log(gameObject.transform.position);
             TogglePlayerSprite(false);
+            Debug.Log("Player Toggled False from GMEvent: " + _playerSprite.enabled);
         }
     }
-
+    public void ResetPlayer() 
+    {
+        CurrentHealth = _MAX_HEALTH;
+        _gameManager.ResetScore();
+        SetUpStartingAmmo(10, 0, 0);
+    }
     public void TogglePlayerSprite(bool state)
     {
         _playerSprite.enabled = state;
-        Debug.Log("Player Sprite: " + _playerSprite.enabled);
     }
     public void MoveToSpawnPoint()
     {
@@ -183,20 +184,17 @@ public class PlayerScript : MonoBehaviour
                                                        _spawnPoint.rotation.z, 
                                                        _spawnPoint.rotation.w);*/
     
-        Debug.Log("MoveStart");
-        Debug.Log(gameObject.transform.position);
+        //Debug.Log("MoveStart");
+        //Debug.Log(gameObject.transform.position);
         gameObject.transform.position = new Vector3(20,0,20);
         gameObject.transform.rotation = new Quaternion(0,0,0,0);
-        Debug.Log("MoveEnd");
-        Debug.Log(gameObject.transform.position);
+        //Debug.Log("MoveEnd");
+        //Debug.Log(gameObject.transform.position);
     }
     public void SpawnPlayer()
     {
-        Debug.Log(gameObject.transform.position);
-        Debug.Log("StartSpawn");
-        MoveToSpawnPoint();
         TogglePlayerSprite(true);
-        Debug.Log("EndSpawn");
+        MoveToSpawnPoint();
     }
 
     // Gameplay
@@ -270,10 +268,13 @@ public class PlayerScript : MonoBehaviour
     }
     public void ActivateWeapon(int index)
     {
-        _activeWeapon = _weaponList[index];
-        _activeWeaponIndex = index;
-        _fireDelay = _weaponList[index].GetComponent<BulletScript>().FireDelay;
-        _weaponSprite.sprite = _weaponList[index].GetComponent<BulletScript>().WeaponSprite;
+        if (_weaponList[index].GetComponent<BulletScript>().Ammo > 0)
+        {
+            _activeWeapon = _weaponList[index];
+            _activeWeaponIndex = index;
+            _fireDelay = _weaponList[index].GetComponent<BulletScript>().FireDelay;
+            _weaponSprite.sprite = _weaponList[index].GetComponent<BulletScript>().WeaponSprite;
+        }
     }
     private void SetUpStartingAmmo(int w1, int w2, int w3)
     {
@@ -288,9 +289,8 @@ public class PlayerScript : MonoBehaviour
 
         if (CurrentHealth <= 0)
         {
+            TogglePlayerSprite(false);
             _sceneManager.LoadScene(_sceneToLoadOnDeath);
-            _UIManager.LoadCanvas(5);
-            _inputManager.ActivateInputMap(_inputManager.InputMap.UI);
         }
     }
     
@@ -304,12 +304,20 @@ public class PlayerScript : MonoBehaviour
     {
         _fireInput = context.ReadValueAsButton();
         Fire(_fireInput);
-        Debug.Log("SouthPlayer");
+        if (_fireInput)
+        {
+            Debug.Log("SouthPlayer");
+        }        
     }
     private void OnWest(InputAction.CallbackContext context) 
     {
         _westButtonInput = context.ReadValueAsButton();
         _isStrafing = _westButtonInput;
+        if (_westButtonInput)
+        {
+            TakeDamage(30);
+            Debug.Log("Damage Taken");
+        }
         Debug.Log("WestPlayer");
     }
     private void OnNorth(InputAction.CallbackContext context) 

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraManagerScript : MonoBehaviour
 {
-    [SerializeField] Camera _activeCamera;
-    [SerializeField] List<Camera> _cameraList = new List<Camera>();
+    [SerializeField] CinemachineVirtualCamera _activeCamera;
+    [SerializeField] List<CinemachineVirtualCamera> _cameraList;
 
     [SerializeField] GameManagerScript _gameManager;
+    [SerializeField] PlayerScript _player;
     
     private static CameraManagerScript _CameraManagerInstance = null;
     // G&S
     public static CameraManagerScript CMInstance { get {return _CameraManagerInstance; } }
-    public Camera ActiveCamera {get { return _activeCamera; } set { _activeCamera = value; } }
+    public CinemachineVirtualCamera ActiveCamera {get { return _activeCamera; } set { _activeCamera = value; } }
+    public List<CinemachineVirtualCamera> CamerasList { get { return _cameraList; } }
     private void Awake()
     {
         CameraManagerSingleton();   
@@ -20,7 +23,10 @@ public class CameraManagerScript : MonoBehaviour
 
     private void Start()
     {
-        SetUpCameraManager();
+        SetUpReferences();
+        SetUpEvents();
+        AddCamerasToList();
+        
     }
 
     private void CameraManagerSingleton()
@@ -36,22 +42,64 @@ public class CameraManagerScript : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    private void SetUpCameraManager()
+    private void SetUpReferences()
     {
-        _cameraList.AddRange(FindObjectsOfType<Camera>());
-        ActivateCamera(0);
+        _gameManager = GameManagerScript.GMInstance;
+        _player = PlayerScript.PlayerInstance;
     }
-
-    public void ActivateCamera(int index)
+    private void SetUpEvents()
     {
-        Debug.Log("Call");
-        if (ActiveCamera != null)
+        //_gameManager.OnGMSetUpComplete += SetUpCameraManager;
+        _gameManager.OnGMSetUpComplete += Test;
+    }
+    
+    private void AddCamerasToList()
+    {
+        _cameraList.Add(gameObject.GetComponentInChildren<CinemachineVirtualCamera>());
+        _cameraList.Add(_player.InGameCamera);
+    }
+    private void Test()
+    {
+        if (_gameManager.SceneLoadedIndex == 4)
         {
-            ActiveCamera.enabled = false;
+            _activeCamera = _cameraList[1];
         }
-        ActiveCamera = _cameraList[index];
-        Debug.Log(_cameraList[index].name);
-        ActiveCamera.enabled = true;
-        //_gameManager.ActiveCamera = ActiveCamera;
+        else
+        {
+            _activeCamera = _cameraList[0];
+        }
+        
+        _gameManager.ActiveCamera = _activeCamera; 
+        Debug.Log("CameraManager CallFromGMEvent: " + _activeCamera);
+    }
+    /*public void SetUpCameraManager()
+    {
+        AddCamerasToList();
+        if (_gameManager.SceneLoadedIndex == 4 ||
+            _gameManager.SceneLoadedIndex == 5 ||
+            _gameManager.SceneLoadedIndex == 6)
+        {
+            ActivateCameraCinemachine(1);
+            Debug.Log("Game Cam Active");
+        }
+        else
+        {
+            ActivateCameraCinemachine(0);
+            Debug.Log("Menu Cam Active");
+        }
+
+        Debug.Log("CameraManager CallFromGMEvent");
+    }*/
+
+    public void ActivateCameraCinemachine(int index)
+    {
+        /*if (ActiveCamera != null)
+        {
+            ActiveCamera.Priority = 0;
+        }*/
+        //_cameraList[index].Priority = 10;
+        _activeCamera = _cameraList[index];
+        //_gameManager.ActiveCamera = _cameraList[index];
+        Debug.Log("camera call");
     }
 }

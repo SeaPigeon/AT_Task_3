@@ -16,30 +16,28 @@ public enum GameState
 public class GameManagerScript : MonoBehaviour
 {
     [Header("Game Variables")]
-    [SerializeField] PlayerScript _player;
     private Scene _activeScene;
     [SerializeField] string _activeSceneName;
     [SerializeField] int _sceneLoadedIndex;
     [SerializeField] GameObject _activeCanvas;
     [SerializeField] GameState _activeGameState;
-    [SerializeField] Camera _activeCamera;
+    [SerializeField] CinemachineVirtualCamera _activeCamera;
     [SerializeField] AudioClip _currentAudioClipLoaded;
     [SerializeField] bool _audioClipPlaying;
-    
     [SerializeField] int _score;
+
+    public event Action OnGMSetUpComplete;
 
     private static GameManagerScript _gameManagerInstance = null;
 
     void Awake()
     {
         GameManagerSingleton();
-        
     }
     void Start()
     {
-        SetUpReferences();
-        SetUpGameManager();
-        ResetScore();
+        SubscribeToEvents();
+        SetUpGame();
     }
 
     // Getters && Setters
@@ -51,7 +49,7 @@ public class GameManagerScript : MonoBehaviour
     public int SceneLoadedIndex { get { return _sceneLoadedIndex; } set { _sceneLoadedIndex = value; } }
     public GameObject ActiveCanvas { get { return _activeCanvas; } set { _activeCanvas = value; } }
     public GameState ActiveGameState { get { return _activeGameState; } set { _activeGameState = value; } }
-    public Camera ActiveCamera {get { return _activeCamera; } set { _activeCamera = value; } }
+    public CinemachineVirtualCamera ActiveCamera {get { return _activeCamera; } set { _activeCamera = value; } }
     public AudioClip CurrentAudioClipLoaded { get { return _currentAudioClipLoaded; } set { _currentAudioClipLoaded = value; } }
     public bool AudioClipPlaying { get { return _audioClipPlaying; } set { _audioClipPlaying = value; } }
     public int Score { get { return _score; } set { _score = value; } }
@@ -70,16 +68,26 @@ public class GameManagerScript : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    private void SetUpReferences()
+    private void SubscribeToEvents()
     {
-        _player = FindObjectOfType<PlayerScript>();
+        SceneManager.sceneLoaded += SetUpGame1;
     }
-    void SetUpGameManager()
+    private void SetUpGame()
     {
         ActiveScene = SceneManager.GetActiveScene();
-        ActiveSceneName = ActiveScene.name;
-        SceneLoadedIndex = ActiveScene.buildIndex;
+        ActiveSceneName = SceneManager.GetActiveScene().name;
+        SceneLoadedIndex = SceneManager.GetActiveScene().buildIndex;
         SetGameState();
+        OnGMSetUpComplete?.Invoke();
+    }
+    private void SetUpGame1(Scene scene, LoadSceneMode mode)
+    {
+        ActiveScene = SceneManager.GetActiveScene();
+        ActiveSceneName = SceneManager.GetActiveScene().name;
+        SceneLoadedIndex = SceneManager.GetActiveScene().buildIndex;
+        SetGameState();
+        OnGMSetUpComplete?.Invoke();
+        ResetScore();
     }
     public void SetGameState()
     {
@@ -97,13 +105,17 @@ public class GameManagerScript : MonoBehaviour
         }
         else if (ActiveScene.name == "LevelEditor")
         {
-            ActiveGameState = GameState.InEditor;
+            ActiveGameState = GameState.InMenu;
         }
         else if (ActiveScene.name == "Level_1" || 
                  ActiveScene.name == "Level_2" ||
                  ActiveScene.name == "Level_3")
         {
             ActiveGameState = GameState.InGame;
+        }
+        else if (ActiveScene.name == "EndGameScene")
+        {
+            ActiveGameState = GameState.InMenu;
         }
     }
     public void QuitGame()

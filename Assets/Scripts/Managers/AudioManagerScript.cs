@@ -9,12 +9,12 @@ public class AudioManagerScript : MonoBehaviour
     [SerializeField] private AudioClip[] _gameSFX;
 
     [Header("Debug")]
+    [SerializeField] private GameManagerScript _gameManager;
     [SerializeField] private AudioClip _currentAudioClipLoaded;
     [SerializeField] private bool _audioClipPlaying;
     [SerializeField] private static AudioSource _audioSourceInstance;
 
     private static AudioManagerScript _audioManagerInstance = null;
-    private GameManagerScript _gameManager;
 
     void Awake()
     {
@@ -23,7 +23,8 @@ public class AudioManagerScript : MonoBehaviour
 
     private void Start()
     {
-        SetUpGameManager();
+        SetUpReferences();
+        SetUpEvents();
     }
 
     // Getters & Setters
@@ -48,11 +49,20 @@ public class AudioManagerScript : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    private void SetUpGameManager()
+    private void SetUpReferences()
     {
-        _gameManager = FindObjectOfType<GameManagerScript>();
+        _gameManager = GameManagerScript.GMInstance;
+    }
+    private void SetUpEvents()
+    {
+        _gameManager.OnGMSetUpComplete += SetUpAudioManager;
+    }
+
+    private void SetUpAudioManager()
+    {
         _gameManager.CurrentAudioClipLoaded = _audioSourceInstance.clip;
         _gameManager.AudioClipPlaying = _audioSourceInstance.isPlaying;
+        Debug.Log("SetUpAudioManagerOnGMEventCall");
     }
     public void PlayMusic(AudioSource ASource, int clipIndex)
     {
@@ -62,11 +72,11 @@ public class AudioManagerScript : MonoBehaviour
         {
             ASource.clip = _gameMusic[clipIndex];
             _currentAudioClipLoaded = _gameMusic[clipIndex];
-            _gameManager.CurrentAudioClipLoaded = _currentAudioClipLoaded;
 
             ASource.Play();
             _audioClipPlaying = ASource.isPlaying;
-            _gameManager.AudioClipPlaying = _audioClipPlaying;
+
+            SetUpAudioManager();
         }
     }
 }

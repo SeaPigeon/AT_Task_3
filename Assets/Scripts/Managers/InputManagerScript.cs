@@ -10,10 +10,8 @@ public class InputManagerScript : MonoBehaviour
     private static InputManagerScript _inputManagerInstance = null;
 
     private InputMap _inputMap;
-    [SerializeField]private InputActionMap _activeInputMap;
-    //private GameManagerScript _gameManager;
-    //private SceneManagerScript _sceneManager;
-    //private UIManagerScript _UIManager;
+    [SerializeField] private InputActionMap _activeInputMap;
+    [SerializeField] private GameManagerScript _gameManager;
 
     [SerializeField] Vector2 _dPadInput;
     [SerializeField] bool _buttonSouthInput;
@@ -33,8 +31,9 @@ public class InputManagerScript : MonoBehaviour
 
     private void Start()
     {
-        SetUpStartingInputMap();
-        SubscribeUIInputs();
+        //SetUpStartingInputMap();
+        SetUpReferences();
+        //SubscribeUIInputs();
         SubscribeToEvents();
     }
 
@@ -65,13 +64,27 @@ public class InputManagerScript : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
+    private void SetUpReferences() 
+    {
+        _gameManager = GameManagerScript.GMInstance;
+    }
+    private void SubscribeToEvents()
+    {
+        OnInputMapTransitionEvent += ActivateInputMap;
+        _gameManager.OnGMSetUpComplete += SetUpStartingInputMap;
+    }
     public void SetUpStartingInputMap()
     {
-        _inputMap = new InputMap();
+        if (_inputMap == null)
+        {
+            _inputMap = new InputMap();
+            SubscribeUIInputs();
+            PlayerScript.PlayerInstance.SubscribeGameInputs();
+        }
 
-        if (SceneManager.GetActiveScene().buildIndex == 4 ||
-            SceneManager.GetActiveScene().buildIndex == 5 || 
-            SceneManager.GetActiveScene().buildIndex == 6) 
+        if (_gameManager.SceneLoadedIndex == 4 ||
+            _gameManager.SceneLoadedIndex == 5 ||
+            _gameManager.SceneLoadedIndex == 6) 
         {
             ActivateInputMap(_inputMap.Game);
         }
@@ -79,6 +92,7 @@ public class InputManagerScript : MonoBehaviour
         {
             ActivateInputMap(_inputMap.UI);
         }
+        Debug.Log("InputMapSet CallFromGMEvent: " + _activeInputMap);
     }
     public void SubscribeUIInputs()
     {
@@ -102,11 +116,6 @@ public class InputManagerScript : MonoBehaviour
         //_inputMap.UI.ShoulderL.canceled += OnShoulderL;
         //_inputMap.UI.StartButton.canceled += OnStart;
     }
-
-    private void SubscribeToEvents()
-    {
-        OnInputMapTransitionEvent += ActivateInputMap;
-    }
     public void ActivateInputMap(InputActionMap map)
     {
         _inputMap.Disable();
@@ -122,12 +131,6 @@ public class InputManagerScript : MonoBehaviour
     }
     private void OnButtonSouth(InputAction.CallbackContext context) 
     {
-        /*if (_gameManager.ActiveSceneName == "DebugScene" && context.phase == InputActionPhase.Canceled)
-        {
-            _sceneManager.OnLoadScene("MainMenu");
-            _UIManager.LoadCanvas(1);
-            Debug.Log("SouthUI Input Debug -> Main Menu");
-        }*/
         Debug.Log("SouthUI Input Log");
     }
     private void OnButtonWest(InputAction.CallbackContext context) 
