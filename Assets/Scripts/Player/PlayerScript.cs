@@ -45,7 +45,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] InputManagerScript _inputManager;
 
     [SerializeField] SpriteRenderer _playerSprite;
-    //[SerializeField] Transform _spawnPoint;
+    [SerializeField] Transform _spawnPoint;
     [SerializeField] bool _isStrafing;
 
     // G&S
@@ -70,17 +70,11 @@ public class PlayerScript : MonoBehaviour
         SetUpReferences();
         SetUpEvents();
         ResetPlayer();
-        //SetUpPlayer();
-        //SubscribeGameInputs();
     }
 
     private void Update()
     {
         Move(MovementInput);
-    }
-    private void LateUpdate()
-    {
-        
     }
 
     // G&S
@@ -132,7 +126,7 @@ public class PlayerScript : MonoBehaviour
         _inputManager.InputMap.Game.SL.canceled += OnSL;
         //_inputManager.InputMap.Game.Start.canceled += OnStart;
     }
-    public void SetUpPlayer()
+    private void SetUpPlayer()
     {
         
         //SubscribeGameInputs();
@@ -172,24 +166,22 @@ public class PlayerScript : MonoBehaviour
     }
     public void MoveToSpawnPoint()
     {
-        //_spawnPoint = FindObjectOfType<SpawnPointScript>().transform;
+        _spawnPoint = FindObjectOfType<SpawnPointScript>().transform;
 
-        //Debug.Log(_spawnPoint);
-        /*
-        gameObject.transform.position = new Vector3(_spawnPoint.position.x,
-                                                    _spawnPoint.position.y,
-                                                    _spawnPoint.position.z);
-        gameObject.transform.rotation = new Quaternion(_spawnPoint.rotation.x, 
-                                                       _spawnPoint.rotation.y,
-                                                       _spawnPoint.rotation.z, 
-                                                       _spawnPoint.rotation.w);*/
-    
-        //Debug.Log("MoveStart");
-        //Debug.Log(gameObject.transform.position);
-        gameObject.transform.position = new Vector3(20,0,20);
-        gameObject.transform.rotation = new Quaternion(0,0,0,0);
-        //Debug.Log("MoveEnd");
-        //Debug.Log(gameObject.transform.position);
+        if (_spawnPoint != null)
+        {
+            gameObject.transform.position = new Vector3(_spawnPoint.position.x,
+                                                        _spawnPoint.position.y,
+                                                        _spawnPoint.position.z);
+            gameObject.transform.rotation = new Quaternion(_spawnPoint.rotation.x,
+                                                           _spawnPoint.rotation.y,
+                                                           _spawnPoint.rotation.z,
+                                                           _spawnPoint.rotation.w);
+        }
+        else
+        {
+            Debug.Log("Spawn Error");
+        }        
     }
     public void SpawnPlayer()
     {
@@ -222,7 +214,7 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Strafe)");
         _appliedMoveVector = transform.TransformDirection(_moveVector);
         _playerCC.Move(_appliedMoveVector * Time.deltaTime);
-        gameObject.transform.Rotate(new Vector3(0, 0, 0));
+        //gameObject.transform.Rotate(new Vector3(0, 0, 0));
     } // BUG!!!
     private void Fire(bool input)
     {
@@ -353,5 +345,17 @@ public class PlayerScript : MonoBehaviour
     private void OnStart(InputAction.CallbackContext context) 
     {
         Debug.Log("StartPlayer");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<EnemyScript>())
+        {
+            TakeDamage(other.GetComponent<EnemyScript>().MDamage);
+        }
+        if (other.GetComponent<EnemyBullet>())
+        {
+            TakeDamage(other.GetComponent<EnemyBullet>().RDamage);
+        }
     }
 }

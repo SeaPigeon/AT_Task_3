@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
+
 public class BillboardScript : MonoBehaviour
 {
-    [SerializeField] private PlayerScript _player;
-    //[SerializeField] private Camera _camera;
     [SerializeField] private CinemachineVirtualCamera _camera;
+    [SerializeField] private CameraManagerScript _cameraManager;
 
     void Start()
     {
         SetUpReferences();
     }
-    
-    // Update is called once per frame
+
     void LateUpdate()
     {
-        //transform.rotation = _camera.transform.rotation;
-        //transform.rotation = Quaternion.Euler(0f, _camera.transform.rotation.eulerAngles.y, 0f);
+        Rotate();
     }
     private void SetUpReferences()
     {
-        //_camera = PlayerScript.PlayerInstance.GetComponentInChildren<Camera>();
-        _camera = CameraManagerScript.CMInstance.CamerasList[1];
+        _cameraManager = CameraManagerScript.CMInstance;
+        _camera = _cameraManager.CamerasList[1];
     }
-    
+    private void Rotate()
+    {
+        transform.rotation = PlayerScript.PlayerInstance.transform.rotation;
+    }
+
 }

@@ -70,7 +70,7 @@ public class GameManagerScript : MonoBehaviour
     }
     private void SubscribeToEvents()
     {
-        SceneManager.sceneLoaded += SetUpGame1;
+        SceneManager.sceneLoaded += SetUpGame;
     }
     private void SetUpGame()
     {
@@ -79,8 +79,9 @@ public class GameManagerScript : MonoBehaviour
         SceneLoadedIndex = SceneManager.GetActiveScene().buildIndex;
         SetGameState();
         OnGMSetUpComplete?.Invoke();
+        Debug.Log("GameManager SetUp");
     }
-    private void SetUpGame1(Scene scene, LoadSceneMode mode)
+    private void SetUpGame(Scene scene, LoadSceneMode mode)
     {
         ActiveScene = SceneManager.GetActiveScene();
         ActiveSceneName = SceneManager.GetActiveScene().name;

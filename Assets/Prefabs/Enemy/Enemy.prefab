@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 347829744878114100}
   - component: {fileID: 4604582988512117978}
   - component: {fileID: 5406002827656600016}
+  - component: {fileID: 3461464680646947951}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -30,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.86, z: 4.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8381952300010343973}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec88c29ba84e2fa4b8f671838ba6a1c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 0}
+  _cameraManager: {fileID: 0}
 --- !u!65 &4604582988512117978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -122,6 +126,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f93bd0a7740ac49898a98f3528a8fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MAX_HEALTH: 100
+  _enemyType: 0
+  _ACTIVATION_RANGE: 50
+  _MAX_HEALTH_BASE: 40
+  _POINT_VALUE_BASE: 100
+  _M_DAMAGE_BASE: 2
+  _R_DAMAGE_BASE: 5
+  _BULLET_BASE: {fileID: 8747574858515922883, guid: 14a656701f1ac5147ad0fc58cf052699, type: 3}
+  _BULLET_LIFESPAN_BASE: 2
+  _BULLET_SPEED_BASE: 10
+  _ATTACK_DELAY_BASE: 2
+  _AGGRO_RANGE_BASE: 20
+  _ATTACK_RANGE_BASE: 10
+  _MAX_HEALTH_STORNG: 70
+  _POINT_VALUE_STRONG: 200
+  _M_DAMAGE_STRONG: 4
+  _R_DAMAGE_STRONG: 10
+  _BULLET_STRONG: {fileID: 5481942864279825143, guid: 761071a493103004cb38e5a58c0c24de, type: 3}
+  _BULLET_LIFESPAN_STRONG: 2
+  _BULLET_SPEED_STRONG: 15
+  _ATTACK_DELAY_STRONG: 1.25
+  _AGGRO_RANGE_STRONG: 30
+  _ATTACK_RANGE_STRONG: 15
+  _MAX_HEALTH_BOSS: 250
+  _POINT_VALUE_BOSS: 1000
+  _M_DAMAGE_BOSS: 10
+  _R_DAMAGE_BOSS: 20
+  _BULLET_BOSS: {fileID: 7714953265416715783, guid: 7d13ec367aca2bf42bb226f8ff1182b6, type: 3}
+  _BULLET_LIFESPAN_BOSS: 2.5
+  _BULLET_SPEED_BOSS: 20
+  _ATTACK_DELAY_BOSS: 0.75
+  _AGGRO_RANGE_BOSS: 40
+  _ATTACK_RANGE_BOSS: 20
+  _gameManager: {fileID: 0}
+  _sceneManager: {fileID: 0}
+  _player: {fileID: 0}
+  _firePoint: {fileID: 1621072152669190654}
   _currentHealth: 0
-  _damage: 10
+  _mDamage: 0
+  _pointValue: 0
+  _attackDelay: 0
+  _lastAttackTime: 0
+  _bullet: {fileID: 0}
+  _attackRange: 0
+  _aggroRange: 0
+  _distanceToPlayer: 0
+  _navMeshAgent: {fileID: 3461464680646947951}
+--- !u!195 &3461464680646947951
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347829744878114107}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.6
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!1 &1621072152669190654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8381952300010343973}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8381952300010343973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621072152669190654}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 347829744878114102}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

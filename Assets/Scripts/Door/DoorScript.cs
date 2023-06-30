@@ -25,6 +25,7 @@ public class DoorScript : MonoBehaviour
     [SerializeField] DoorType _doorType;
     [SerializeField] DoorColour _doorColour;
     [SerializeField] DoorState _currentDoorState;
+    [SerializeField] List<Collider> _objectsInTrigger;
 
     void Start()
     {
@@ -81,8 +82,10 @@ public class DoorScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerScript>())
+        if (other.GetComponent<PlayerScript>() || other.GetComponent<EnemyScript>())
         {
+            _objectsInTrigger.Add(other);
+
             switch (_doorType)
             {
                 case DoorType.NormalDoor:
@@ -102,10 +105,15 @@ public class DoorScript : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerScript>())
+        if (other.GetComponent<PlayerScript>() || other.GetComponent<EnemyScript>())
         {
-            _currentDoorState = DoorState.Closed;
-            ToggleDoor();
+            _objectsInTrigger.Remove(other);
+            if (_objectsInTrigger.Count == 0)
+            {
+                _currentDoorState = DoorState.Closed;
+                ToggleDoor();
+            }
+            
         }
     }
 }

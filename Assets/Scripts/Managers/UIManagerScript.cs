@@ -87,7 +87,7 @@ public class UIManagerScript : MonoBehaviour
         {
             LoadCanvas(5);
         }
-        Debug.Log("CanvasLoadedFromGMEvent: " + _activeCanvas.name);
+        Debug.Log("UI Manager Canvas Loaded from GMEvent: " + _activeCanvas.name);
     }
     public void SetUpEventSystem()
     {

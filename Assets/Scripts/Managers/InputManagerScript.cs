@@ -31,9 +31,7 @@ public class InputManagerScript : MonoBehaviour
 
     private void Start()
     {
-        //SetUpStartingInputMap();
         SetUpReferences();
-        //SubscribeUIInputs();
         SubscribeToEvents();
     }
 
@@ -92,7 +90,7 @@ public class InputManagerScript : MonoBehaviour
         {
             ActivateInputMap(_inputMap.UI);
         }
-        Debug.Log("InputMapSet CallFromGMEvent: " + _activeInputMap);
+        Debug.Log("InputManager Call from GMEvent: " + _activeInputMap);
     }
     public void SubscribeUIInputs()
     {

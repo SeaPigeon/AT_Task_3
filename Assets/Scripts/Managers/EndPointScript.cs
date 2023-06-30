@@ -10,7 +10,8 @@ public enum Scenes
     Editor,
     Level_1,
     Level_2,
-    Level_3
+    Level_3,
+    EndScreen
 }
 public class EndPointScript : MonoBehaviour
 {
@@ -56,6 +57,9 @@ public class EndPointScript : MonoBehaviour
 
             case Scenes.Level_3:
                 LoadLevel3Scene();
+                break;
+            case Scenes.EndScreen:
+                LoadEndGameScreen();
                 break;
             default:
                 break;

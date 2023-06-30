@@ -70,7 +70,7 @@ public class CameraManagerScript : MonoBehaviour
         }
         
         _gameManager.ActiveCamera = _activeCamera; 
-        Debug.Log("CameraManager CallFromGMEvent: " + _activeCamera);
+        Debug.Log("CameraManager Call from GMEvent: " + _activeCamera);
     }
     /*public void SetUpCameraManager()
     {
