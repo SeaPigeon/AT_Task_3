@@ -39,7 +39,10 @@ public class EnemyBullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Wall") || other.GetComponent<PlayerScript>())
+        if (other.GetComponent<PlayerScript>() ||
+            other.CompareTag("Wall") || 
+            (other.CompareTag("Door") && 
+            other.GetComponent<DoorScript>().CurrentDoorState == DoorScript.DoorState.Closed))
         {
             Destroy(gameObject);
         }

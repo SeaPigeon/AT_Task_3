@@ -12,11 +12,19 @@ public enum EnemyType
     StrongEnemy,
     Boss
 }
+public enum CurrentState
+{
+    Inactive,
+    Idle,
+    Chase,
+    Shoot
+}
 
 public class EnemyScript : MonoBehaviour
 {
     [Header("Enemy Type")]
     [SerializeField] EnemyType _enemyType;
+    [SerializeField] CurrentState _currentState;
     [SerializeField] float _ACTIVATION_RANGE = 50;
     [Header("BaseEnemy")]
     [SerializeField] int _MAX_HEALTH_BASE = 40;
@@ -66,6 +74,9 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] float _aggroRange;
     [SerializeField] float _distanceToPlayer;
     [SerializeField] NavMeshAgent _navMeshAgent;
+    [SerializeField] bool _isPatrolling;
+    [SerializeField] Vector3 _patrolPoint;
+
     void Start()
     {
         SetUpReferences();
@@ -90,6 +101,7 @@ public class EnemyScript : MonoBehaviour
     private void SetUpEnemy()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _isPatrolling = false;
 
         switch (_enemyType)
         {
@@ -103,7 +115,6 @@ public class EnemyScript : MonoBehaviour
                 _bullet.GetComponent<EnemyBullet>().BulletLifeSpan = _BULLET_LIFESPAN_BASE;
                 _bullet.GetComponent<EnemyBullet>().BulletSpeed = _BULLET_SPEED_BASE;
                 _aggroRange = _AGGRO_RANGE_BASE;
-                //_navMeshAgent.stoppingDistance = _ATTACK_RANGE_BASE;
                 _attackRange = _ATTACK_RANGE_BASE;
                 break;
             case EnemyType.StrongEnemy:
@@ -143,54 +154,121 @@ public class EnemyScript : MonoBehaviour
                 _attackRange = _ATTACK_RANGE_BASE;
                 break;
         }
+        if (PlayerInRange(_ACTIVATION_RANGE))
+        {
+            _currentState = CurrentState.Idle;
+        }
     }
     private void Fire()
     {
-        if (Time.time >= _lastAttackTime + _attackDelay)
+        if (Time.time >= _lastAttackTime + _attackDelay && LoS())
         {
             GameObject instance;
-            Vector3 targetPos;
-            Vector3 moveDirection;
 
             _navMeshAgent.SetDestination(transform.position);
             _lastAttackTime = Time.time;
-
-            targetPos = _player.transform.position;
-            moveDirection = (targetPos - _firePoint.transform.position).normalized;
+            
             instance = Instantiate(_bullet, _firePoint.transform.position, _player.transform.rotation);
-            instance.GetComponent<EnemyBullet>().MoveDirection = moveDirection;
+            instance.GetComponent<EnemyBullet>().MoveDirection = PlayerDirection();
             Debug.Log("Enemy pew pew");
         }
     }
     private void Chase()
     {
+        _navMeshAgent.isStopped = false;
         _navMeshAgent.SetDestination(_player.transform.position);
     }
-    private void Idol()
+    private void Idle()
     {
+        if (!_isPatrolling)
+        {
+            _patrolPoint = GenerateRandomPoint(transform.position, 2);
+            _isPatrolling = true;
+            StartCoroutine(WaitAfterPatrol(5f));
+            Debug.Log(_patrolPoint);
+        }
+        _navMeshAgent.isStopped = false;
+        _navMeshAgent.SetDestination(_patrolPoint);
 
+        if (Vector3.Distance(transform.position, _patrolPoint) <= _navMeshAgent.stoppingDistance)
+        {
+            _navMeshAgent.isStopped = true;
+        }
     }
-    
+    private Vector3 GenerateRandomPoint(Vector3 position, int range)
+    {
+        Vector3 randomPoint = position + Random.insideUnitSphere * range;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomPoint, out hit, range, NavMesh.AllAreas);
+        return hit.position;
+    }
+    private IEnumerator WaitAfterPatrol(float time)
+    {
+        Debug.Log("started CR");
+        yield return new WaitForSeconds(time);
+        _isPatrolling = false;
+    }
     private void Behaviour()
     {
         if (PlayerInRange(_ACTIVATION_RANGE))
         {
             if (PlayerInRange(_attackRange))
             {
-                Fire();
-                return;
+                if (LoS())
+                {
+                    _currentState = CurrentState.Shoot;
+                }
+                else
+                {
+                    _currentState = CurrentState.Chase;
+                }
+                
             }
             else if (PlayerInRange(_aggroRange))
             {
-                Chase();
-                return;
+                _currentState = CurrentState.Chase;
             }
             else
             {
-                Idol();
-                return;
+                _currentState = CurrentState.Idle;
             }
         }
+        else
+        {
+            _currentState = CurrentState.Inactive;
+        }
+
+        switch (_currentState)
+        {
+            case CurrentState.Idle:
+                Idle();
+                //Debug.Log("Idle Enemy");
+                break;
+            case CurrentState.Chase:
+                Chase();
+                //Debug.Log("Chase Enemy");
+                break;
+            case CurrentState.Shoot:
+                Fire();
+                //Debug.Log("Fire Enemy");
+                break;
+            case CurrentState.Inactive:
+                _navMeshAgent.isStopped = true;
+                break;
+            default:
+                _navMeshAgent.isStopped = true;
+                //Debug.Log("Inactive Enemy ERROR");
+                break;
+        }
+    }
+    private Vector3 PlayerDirection()
+    {
+        Vector3 targetPos;
+        Vector3 moveDirection;
+
+        targetPos = _player.transform.position;
+        moveDirection = (targetPos - _firePoint.transform.position).normalized;
+        return moveDirection;
     }
     private bool PlayerInRange(float range) 
     {
@@ -204,6 +282,22 @@ public class EnemyScript : MonoBehaviour
         {
             return false;
         }
+    }
+    private bool LoS()
+    {
+        Ray ray = new Ray(transform.position, PlayerDirection());
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, _attackRange))
+        {
+            if (hit.collider.CompareTag("Wall") || 
+                (hit.collider.CompareTag("Door") && 
+                hit.collider.GetComponent<DoorScript>().CurrentDoorState == DoorScript.DoorState.Closed))
+            {
+                Debug.Log(hit);
+                return false;
+            }
+        }
+        return true;
     }
     public void TakeDamage(int dmg)
     {

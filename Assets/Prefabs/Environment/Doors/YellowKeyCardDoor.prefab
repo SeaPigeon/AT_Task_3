@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4709459657736255431}
   m_Layer: 0
   m_Name: YellowKeyCardDoor
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,6 +61,7 @@ MonoBehaviour:
   _doorType: 1
   _doorColour: 2
   _currentDoorState: 1
+  _objectsInTrigger: []
 --- !u!1 &8340984819285649699
 GameObject:
   m_ObjectHideFlags: 0

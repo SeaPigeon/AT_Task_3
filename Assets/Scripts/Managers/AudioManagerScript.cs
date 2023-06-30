@@ -60,23 +60,36 @@ public class AudioManagerScript : MonoBehaviour
 
     private void SetUpAudioManager()
     {
-        _gameManager.CurrentAudioClipLoaded = _audioSourceInstance.clip;
-        _gameManager.AudioClipPlaying = _audioSourceInstance.isPlaying;
+        //_gameManager.CurrentAudioClipLoaded = _audioSourceInstance.clip;
+        //_gameManager.AudioClipPlaying = _audioSourceInstance.isPlaying;
+        _audioSourceInstance = FindObjectOfType<AudioSource>();
         Debug.Log("SetUpAudioManagerOnGMEventCall");
     }
-    public void PlayMusic(AudioSource ASource, int clipIndex)
+    public void PlayMusic(int clipIndex)
     {
-        if ((!ASource.isPlaying) || 
-             (ASource.isPlaying && 
-              ASource.clip != _gameMusic[clipIndex]))
+        if ((!_audioSourceInstance.isPlaying) || 
+             (_audioSourceInstance.isPlaying &&
+              _audioSourceInstance.clip != _gameMusic[clipIndex]))
         {
-            ASource.clip = _gameMusic[clipIndex];
+            _audioSourceInstance.clip = _gameMusic[clipIndex];
             _currentAudioClipLoaded = _gameMusic[clipIndex];
 
-            ASource.Play();
-            _audioClipPlaying = ASource.isPlaying;
+            _audioSourceInstance.Play();
+            _audioClipPlaying = _audioSourceInstance.isPlaying;
 
             SetUpAudioManager();
+        }
+    }
+    public void PlaySFX(int clipIndex)
+    {
+        if ((!_audioSourceInstance.isPlaying) ||
+             (_audioSourceInstance.isPlaying &&
+              _audioSourceInstance.clip != _gameSFX[clipIndex]))
+        {
+            _audioSourceInstance.clip = _gameSFX[clipIndex];
+            _currentAudioClipLoaded = _gameSFX[clipIndex];
+
+            _audioSourceInstance.Play();
         }
     }
 }

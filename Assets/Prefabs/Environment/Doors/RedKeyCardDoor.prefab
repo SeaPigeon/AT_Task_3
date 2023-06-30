@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8835417488769157796}
   m_Layer: 0
   m_Name: RedKeyCardDoor
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,6 +61,7 @@ MonoBehaviour:
   _doorType: 1
   _doorColour: 0
   _currentDoorState: 1
+  _objectsInTrigger: []
 --- !u!1 &7858256362640967218
 GameObject:
   m_ObjectHideFlags: 0

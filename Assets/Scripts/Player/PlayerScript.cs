@@ -43,7 +43,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameManagerScript _gameManager;
     [SerializeField] SceneManagerScript _sceneManager;
     [SerializeField] InputManagerScript _inputManager;
-
+    //[SerializeField] AudioManagerScript _audioManager;
     [SerializeField] SpriteRenderer _playerSprite;
     [SerializeField] Transform _spawnPoint;
     [SerializeField] bool _isStrafing;
@@ -99,6 +99,7 @@ public class PlayerScript : MonoBehaviour
         _gameManager = GameManagerScript.GMInstance;
         _inputManager = InputManagerScript.IMInstance;
         _sceneManager = SceneManagerScript.SMInstance;
+        //_audioManager = AudioManagerScript.AMInstance;
         _playerSprite = GetComponentInChildren<SpriteRenderer>();
         _playerCC = gameObject.GetComponent<CharacterController>();
     }
@@ -192,12 +193,14 @@ public class PlayerScript : MonoBehaviour
     // Gameplay
     private void Move(Vector2 input)
     {
-        if (_isStrafing && Mathf.Abs(input.x)> 0.3f && Mathf.Abs(input.y) > 0.3f)
+        if (_isStrafing && (input.x != 0 || input.y != 0))
         {
             Strafe(input);
         }
         else
         {
+            _moveVector = Vector3.zero;
+            _appliedMoveVector = Vector3.zero;
             _moveVector.z = input.y * _moveSpeed;
 
             _appliedMoveVector = transform.TransformDirection(_moveVector);
@@ -206,16 +209,15 @@ public class PlayerScript : MonoBehaviour
         }
         
 
-    } // BUG!!!
+    }
     private void Strafe(Vector2 input)
     {
         _moveVector.x = input.x * _moveSpeed;
         _moveVector.z = input.y * _moveSpeed;
-        Debug.Log("Strafe)");
+        
         _appliedMoveVector = transform.TransformDirection(_moveVector);
         _playerCC.Move(_appliedMoveVector * Time.deltaTime);
-        //gameObject.transform.Rotate(new Vector3(0, 0, 0));
-    } // BUG!!!
+    } 
     private void Fire(bool input)
     {
         if (_activeWeapon.GetComponent<BulletScript>().Ammo > 0)
@@ -225,6 +227,7 @@ public class PlayerScript : MonoBehaviour
                 _lastBulletTime = Time.time;
                 Instantiate(_activeWeapon, _firePoint.transform.position, _firePoint.transform.rotation);
                 _activeWeapon.GetComponent<BulletScript>().Ammo -= 1;
+                //_audioManager.PlaySFX(0);
                 Debug.Log("pew pew");
             }
         }
@@ -285,7 +288,7 @@ public class PlayerScript : MonoBehaviour
             _sceneManager.LoadScene(_sceneToLoadOnDeath);
         }
     }
-    
+
     // Inputs
     private void OnMove(InputAction.CallbackContext context) 
     {
@@ -305,11 +308,11 @@ public class PlayerScript : MonoBehaviour
     {
         _westButtonInput = context.ReadValueAsButton();
         _isStrafing = _westButtonInput;
-        if (_westButtonInput)
+        /*if (_westButtonInput)
         {
             TakeDamage(30);
             Debug.Log("Damage Taken");
-        }
+        }*/
         Debug.Log("WestPlayer");
     }
     private void OnNorth(InputAction.CallbackContext context) 

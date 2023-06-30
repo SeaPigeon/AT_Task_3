@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5358216104893723890}
   - component: {fileID: 3387392043806458697}
   - component: {fileID: 4781127019317592586}
+  - component: {fileID: 188456828187469180}
   m_Layer: 0
   m_Name: EnemyBulletBase
   m_TagString: Untagged
@@ -126,3 +127,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244c0b85bb3357842b7da759a16e18b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rDamage: 0
+  _bulletLifeSpan: 0
+  _bulletSpeed: 0
+  _bulletRB: {fileID: 0}
+  _moveDirection: {x: 0, y: 0, z: 0}
+--- !u!114 &188456828187469180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747574858515922883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec88c29ba84e2fa4b8f671838ba6a1c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sprite: {fileID: 0}

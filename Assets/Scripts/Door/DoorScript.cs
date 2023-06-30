@@ -27,6 +27,8 @@ public class DoorScript : MonoBehaviour
     [SerializeField] DoorState _currentDoorState;
     [SerializeField] List<Collider> _objectsInTrigger;
 
+    // G&S
+    public DoorState CurrentDoorState { get { return _currentDoorState; } }
     void Start()
     {
         ToggleDoor();
@@ -85,7 +87,7 @@ public class DoorScript : MonoBehaviour
         if (other.GetComponent<PlayerScript>() || other.GetComponent<EnemyScript>())
         {
             _objectsInTrigger.Add(other);
-
+            Debug.Log("Detected");
             switch (_doorType)
             {
                 case DoorType.NormalDoor:

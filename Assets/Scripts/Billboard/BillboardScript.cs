@@ -6,9 +6,7 @@ using Cinemachine;
 
 public class BillboardScript : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera _camera;
-    [SerializeField] private CameraManagerScript _cameraManager;
-
+    [SerializeField] SpriteRenderer _sprite;
     void Start()
     {
         SetUpReferences();
@@ -20,12 +18,11 @@ public class BillboardScript : MonoBehaviour
     }
     private void SetUpReferences()
     {
-        _cameraManager = CameraManagerScript.CMInstance;
-        _camera = _cameraManager.CamerasList[1];
+        _sprite = GetComponent<SpriteRenderer>();
     }
     private void Rotate()
     {
-        transform.rotation = PlayerScript.PlayerInstance.transform.rotation;
+        _sprite.transform.rotation = PlayerScript.PlayerInstance.transform.rotation;
     }
 
 }
