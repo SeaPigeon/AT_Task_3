@@ -26,7 +26,6 @@ public class CameraManagerScript : MonoBehaviour
         SetUpReferences();
         SetUpEvents();
         AddCamerasToList();
-        
     }
 
     private void CameraManagerSingleton()
@@ -49,8 +48,7 @@ public class CameraManagerScript : MonoBehaviour
     }
     private void SetUpEvents()
     {
-        //_gameManager.OnGMSetUpComplete += SetUpCameraManager;
-        _gameManager.OnGMSetUpComplete += Test;
+        _gameManager.OnGMSetUpComplete += SetUpCameraManager;
     }
     
     private void AddCamerasToList()
@@ -58,21 +56,8 @@ public class CameraManagerScript : MonoBehaviour
         _cameraList.Add(gameObject.GetComponentInChildren<CinemachineVirtualCamera>());
         _cameraList.Add(_player.InGameCamera);
     }
-    private void Test()
-    {
-        if (_gameManager.SceneLoadedIndex == 4)
-        {
-            _activeCamera = _cameraList[1];
-        }
-        else
-        {
-            _activeCamera = _cameraList[0];
-        }
-        
-        _gameManager.ActiveCamera = _activeCamera; 
-        Debug.Log("CameraManager Call from GMEvent: " + _activeCamera);
-    }
-    /*public void SetUpCameraManager()
+
+    public void SetUpCameraManager()
     {
         AddCamerasToList();
         if (_gameManager.SceneLoadedIndex == 4 ||
@@ -80,26 +65,21 @@ public class CameraManagerScript : MonoBehaviour
             _gameManager.SceneLoadedIndex == 6)
         {
             ActivateCameraCinemachine(1);
-            Debug.Log("Game Cam Active");
+            //Debug.Log("Game Cam Active");
         }
         else
         {
             ActivateCameraCinemachine(0);
-            Debug.Log("Menu Cam Active");
+            //Debug.Log("Menu Cam Active");
         }
 
-        Debug.Log("CameraManager CallFromGMEvent");
-    }*/
+        //Debug.Log("CameraManager CallFromGMEvent");
+    }
 
     public void ActivateCameraCinemachine(int index)
     {
-        /*if (ActiveCamera != null)
-        {
-            ActiveCamera.Priority = 0;
-        }*/
-        //_cameraList[index].Priority = 10;
+        _cameraList[index].MoveToTopOfPrioritySubqueue();;
         _activeCamera = _cameraList[index];
-        //_gameManager.ActiveCamera = _cameraList[index];
-        Debug.Log("camera call");
+        _gameManager.ActiveCamera = _cameraList[index];
     }
 }

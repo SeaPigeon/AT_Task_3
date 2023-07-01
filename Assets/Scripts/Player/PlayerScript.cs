@@ -43,6 +43,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameManagerScript _gameManager;
     [SerializeField] SceneManagerScript _sceneManager;
     [SerializeField] InputManagerScript _inputManager;
+    [SerializeField] LinkUIScript _UILinker;
     //[SerializeField] AudioManagerScript _audioManager;
     [SerializeField] SpriteRenderer _playerSprite;
     [SerializeField] Transform _spawnPoint;
@@ -99,6 +100,7 @@ public class PlayerScript : MonoBehaviour
         _gameManager = GameManagerScript.GMInstance;
         _inputManager = InputManagerScript.IMInstance;
         _sceneManager = SceneManagerScript.SMInstance;
+        _UILinker = UIManagerScript.UIMInstance.GetComponent<LinkUIScript>();
         //_audioManager = AudioManagerScript.AMInstance;
         _playerSprite = GetComponentInChildren<SpriteRenderer>();
         _playerCC = gameObject.GetComponent<CharacterController>();
@@ -129,9 +131,6 @@ public class PlayerScript : MonoBehaviour
     }
     private void SetUpPlayer()
     {
-        
-        //SubscribeGameInputs();
-
         _activeWeapon = _weaponList[0].gameObject;
         _activeWeaponIndex = 0;
         _fireDelay = _weaponList[0].GetComponent<BulletScript>().FireDelay;
@@ -140,19 +139,20 @@ public class PlayerScript : MonoBehaviour
         _hasRedKeycard = false;
         _hasBlueKeycard = false;
         _hasYellowKeycard = false;
-
+        LinkUI();
+        FindSpawnPoint();
         if (_gameManager.SceneLoadedIndex == 4 ||
             _gameManager.SceneLoadedIndex == 5 ||
             _gameManager.SceneLoadedIndex == 6)
         {
 
             SpawnPlayer();
-            Debug.Log("Player Spawned from GMEvent: " + transform.position);
+            //Debug.Log("Player Spawned from GMEvent: " + transform.position);
         }
         else
         {
             TogglePlayerSprite(false);
-            Debug.Log("Player Toggled False from GMEvent: " + _playerSprite.enabled);
+            //Debug.Log("Player Toggled False from GMEvent: " + _playerSprite.enabled);
         }
     }
     public void ResetPlayer() 
@@ -167,8 +167,6 @@ public class PlayerScript : MonoBehaviour
     }
     public void MoveToSpawnPoint()
     {
-        _spawnPoint = FindObjectOfType<SpawnPointScript>().transform;
-
         if (_spawnPoint != null)
         {
             gameObject.transform.position = new Vector3(_spawnPoint.position.x,
@@ -182,12 +180,17 @@ public class PlayerScript : MonoBehaviour
         else
         {
             Debug.Log("Spawn Error");
-        }        
+        }
+        Debug.Log("Player Spawned from GMEvent: " + transform.position);
     }
     public void SpawnPlayer()
     {
         TogglePlayerSprite(true);
         MoveToSpawnPoint();
+    }
+    private void FindSpawnPoint()
+    {
+        _spawnPoint = FindObjectOfType<SpawnPointScript>().transform;
     }
 
     // Gameplay
@@ -227,6 +230,7 @@ public class PlayerScript : MonoBehaviour
                 _lastBulletTime = Time.time;
                 Instantiate(_activeWeapon, _firePoint.transform.position, _firePoint.transform.rotation);
                 _activeWeapon.GetComponent<BulletScript>().Ammo -= 1;
+                _UILinker.AmmoTextUI.text = _activeWeapon.GetComponent<BulletScript>().Ammo.ToString();
                 //_audioManager.PlaySFX(0);
                 Debug.Log("pew pew");
             }
@@ -277,15 +281,23 @@ public class PlayerScript : MonoBehaviour
         _weaponList[1].GetComponent<BulletScript>().Ammo = w2;
         _weaponList[2].GetComponent<BulletScript>().Ammo = w3;
     }
-
+    private void LinkUI()
+    {
+        _UILinker.HealthTextUI.text = _currentHealth.ToString();
+        _UILinker.AmmoTextUI.text = _activeWeapon.GetComponent<BulletScript>().Ammo.ToString();
+        _UILinker.ScoreTextUI.text = _gameManager.Score.ToString();
+        //_UILinker.WeaponTextUI = 
+    }
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
+        _UILinker.HealthTextUI.text = _currentHealth.ToString();
 
         if (CurrentHealth <= 0)
         {
             TogglePlayerSprite(false);
             _sceneManager.LoadScene(_sceneToLoadOnDeath);
+            _UILinker.ScoreEndScreenUI.text = "Score: " + _gameManager.Score.ToString();
         }
     }
 

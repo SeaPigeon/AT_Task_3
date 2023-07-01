@@ -62,6 +62,7 @@ public class EnemyScript : MonoBehaviour
     [Header("Debug")]
     [SerializeField] GameManagerScript _gameManager;
     [SerializeField] SceneManagerScript _sceneManager;
+    [SerializeField] LinkUIScript _UILinker;
     [SerializeField] PlayerScript _player;
     [SerializeField] GameObject _firePoint;
     [SerializeField] int _currentHealth;
@@ -94,6 +95,7 @@ public class EnemyScript : MonoBehaviour
     {
         _gameManager = GameManagerScript.GMInstance;
         _sceneManager = SceneManagerScript.SMInstance;
+        _UILinker = UIManagerScript.UIMInstance.GetComponent<LinkUIScript>();
         _player = PlayerScript.PlayerInstance;
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
@@ -185,7 +187,7 @@ public class EnemyScript : MonoBehaviour
             _patrolPoint = GenerateRandomPoint(transform.position, 2);
             _isPatrolling = true;
             StartCoroutine(WaitAfterPatrol(5f));
-            Debug.Log(_patrolPoint);
+            //Debug.Log(_patrolPoint);
         }
         _navMeshAgent.isStopped = false;
         _navMeshAgent.SetDestination(_patrolPoint);
@@ -204,7 +206,6 @@ public class EnemyScript : MonoBehaviour
     }
     private IEnumerator WaitAfterPatrol(float time)
     {
-        Debug.Log("started CR");
         yield return new WaitForSeconds(time);
         _isPatrolling = false;
     }
@@ -306,6 +307,7 @@ public class EnemyScript : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _gameManager.ChangeScore(_pointValue);
+            _UILinker.ScoreTextUI.text = _gameManager.Score.ToString();
 
             if (_enemyType != EnemyType.Boss)
             {
@@ -314,6 +316,7 @@ public class EnemyScript : MonoBehaviour
             else
             {
                 _sceneManager.LoadScene("EndGameScene");
+                _UILinker.ScoreEndScreenUI.text = "Score: " + _gameManager.Score.ToString();
             } 
         }
     }

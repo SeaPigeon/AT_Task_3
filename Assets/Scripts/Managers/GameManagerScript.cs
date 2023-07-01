@@ -79,7 +79,7 @@ public class GameManagerScript : MonoBehaviour
         SceneLoadedIndex = SceneManager.GetActiveScene().buildIndex;
         SetGameState();
         OnGMSetUpComplete?.Invoke();
-        Debug.Log("GameManager SetUp");
+        //Debug.Log("GameManager SetUp");
     }
     private void SetUpGame(Scene scene, LoadSceneMode mode)
     {

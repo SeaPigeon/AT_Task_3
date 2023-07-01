@@ -39,11 +39,13 @@ public class DoorScript : MonoBehaviour
         {
             var door = gameObject.transform.GetChild(0).transform;
             door.position = new Vector3(door.position.x, door.localScale.y / 2, door.position.z);
+            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, -2, 0), 2 * Time.deltaTime);
         }
         else if (_currentDoorState == DoorState.Open)
         {
             var door = gameObject.transform.GetChild(0).transform;
             door.position = new Vector3(door.position.x, -door.localScale.y / 2, door.position.z);
+            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 2, 0), 2 * Time.deltaTime);
         }
         
         

@@ -63,7 +63,6 @@ public class AudioManagerScript : MonoBehaviour
         //_gameManager.CurrentAudioClipLoaded = _audioSourceInstance.clip;
         //_gameManager.AudioClipPlaying = _audioSourceInstance.isPlaying;
         _audioSourceInstance = FindObjectOfType<AudioSource>();
-        Debug.Log("SetUpAudioManagerOnGMEventCall");
     }
     public void PlayMusic(int clipIndex)
     {

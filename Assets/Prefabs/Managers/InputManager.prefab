@@ -43,6 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca6bc6d0bd32da84facdb0f2046a3093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeInputMap:
+    m_Name: Active Input Map
+    m_Id: a1a37dbe-a4c5-433c-8a84-4aed99a0f150
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
+  _gameManager: {fileID: 0}
   _dPadInput: {x: 0, y: 0}
   _buttonSouthInput: 0
   _buttonWestInput: 0

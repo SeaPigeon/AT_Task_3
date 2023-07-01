@@ -19,7 +19,7 @@ public class @InputMap : IInputActionCollection, IDisposable
             ""id"": ""833187e2-bcd1-42c5-985c-185eb0fc18e7"",
             ""actions"": [
                 {
-                    ""name"": ""Move2"",
+                    ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""712f66d1-4f15-4141-a0da-606fd8b31c73"",
                     ""expectedControlType"": ""Vector2"",
@@ -81,14 +81,6 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""Button"",
-                    ""id"": ""3f721da8-7780-492a-8699-0efa87923cbf"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -99,7 +91,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -110,7 +102,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -121,7 +113,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -132,7 +124,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -143,7 +135,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -154,7 +146,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -165,7 +157,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -176,7 +168,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -187,7 +179,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -198,7 +190,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -209,7 +201,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -220,7 +212,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -231,7 +223,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -242,9 +234,20 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Move2"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16742f81-ecbc-4806-ac6d-3bf9752fb95f"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -381,68 +384,13 @@ public class @InputMap : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f26b8c00-15c9-4a81-873c-3fe47741bb9e"",
-                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""SR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""467459da-5874-4156-8e8a-f73d208e0db6"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""c801f6b5-ad47-4d4a-8e5c-ffcc325221c9"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""c145ef4a-2285-4458-902f-bb2fc0b3670e"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""7a54ff9d-fb7f-4c61-a6a4-c554e01b4107"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""e4e9280c-7f99-4a9f-8869-1cc21fa2ceb9"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -870,7 +818,7 @@ public class @InputMap : IInputActionCollection, IDisposable
 }");
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
-        m_Game_Move2 = m_Game.FindAction("Move2", throwIfNotFound: true);
+        m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
         m_Game_East = m_Game.FindAction("East", throwIfNotFound: true);
         m_Game_North = m_Game.FindAction("North", throwIfNotFound: true);
         m_Game_South = m_Game.FindAction("South", throwIfNotFound: true);
@@ -878,7 +826,6 @@ public class @InputMap : IInputActionCollection, IDisposable
         m_Game_Start = m_Game.FindAction("Start", throwIfNotFound: true);
         m_Game_SL = m_Game.FindAction("SL", throwIfNotFound: true);
         m_Game_SR = m_Game.FindAction("SR", throwIfNotFound: true);
-        m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_DPad = m_UI.FindAction("DPad", throwIfNotFound: true);
@@ -938,7 +885,7 @@ public class @InputMap : IInputActionCollection, IDisposable
     // Game
     private readonly InputActionMap m_Game;
     private IGameActions m_GameActionsCallbackInterface;
-    private readonly InputAction m_Game_Move2;
+    private readonly InputAction m_Game_Move;
     private readonly InputAction m_Game_East;
     private readonly InputAction m_Game_North;
     private readonly InputAction m_Game_South;
@@ -946,12 +893,11 @@ public class @InputMap : IInputActionCollection, IDisposable
     private readonly InputAction m_Game_Start;
     private readonly InputAction m_Game_SL;
     private readonly InputAction m_Game_SR;
-    private readonly InputAction m_Game_Move;
     public struct GameActions
     {
         private @InputMap m_Wrapper;
         public GameActions(@InputMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move2 => m_Wrapper.m_Game_Move2;
+        public InputAction @Move => m_Wrapper.m_Game_Move;
         public InputAction @East => m_Wrapper.m_Game_East;
         public InputAction @North => m_Wrapper.m_Game_North;
         public InputAction @South => m_Wrapper.m_Game_South;
@@ -959,7 +905,6 @@ public class @InputMap : IInputActionCollection, IDisposable
         public InputAction @Start => m_Wrapper.m_Game_Start;
         public InputAction @SL => m_Wrapper.m_Game_SL;
         public InputAction @SR => m_Wrapper.m_Game_SR;
-        public InputAction @Move => m_Wrapper.m_Game_Move;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -969,9 +914,9 @@ public class @InputMap : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_GameActionsCallbackInterface != null)
             {
-                @Move2.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMove2;
-                @Move2.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMove2;
-                @Move2.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMove2;
+                @Move.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
                 @East.started -= m_Wrapper.m_GameActionsCallbackInterface.OnEast;
                 @East.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnEast;
                 @East.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnEast;
@@ -993,16 +938,13 @@ public class @InputMap : IInputActionCollection, IDisposable
                 @SR.started -= m_Wrapper.m_GameActionsCallbackInterface.OnSR;
                 @SR.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnSR;
                 @SR.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnSR;
-                @Move.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
             }
             m_Wrapper.m_GameActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move2.started += instance.OnMove2;
-                @Move2.performed += instance.OnMove2;
-                @Move2.canceled += instance.OnMove2;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
                 @East.started += instance.OnEast;
                 @East.performed += instance.OnEast;
                 @East.canceled += instance.OnEast;
@@ -1024,9 +966,6 @@ public class @InputMap : IInputActionCollection, IDisposable
                 @SR.started += instance.OnSR;
                 @SR.performed += instance.OnSR;
                 @SR.canceled += instance.OnSR;
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
             }
         }
     }
@@ -1167,7 +1106,7 @@ public class @InputMap : IInputActionCollection, IDisposable
     }
     public interface IGameActions
     {
-        void OnMove2(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
         void OnEast(InputAction.CallbackContext context);
         void OnNorth(InputAction.CallbackContext context);
         void OnSouth(InputAction.CallbackContext context);
@@ -1175,7 +1114,6 @@ public class @InputMap : IInputActionCollection, IDisposable
         void OnStart(InputAction.CallbackContext context);
         void OnSL(InputAction.CallbackContext context);
         void OnSR(InputAction.CallbackContext context);
-        void OnMove(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

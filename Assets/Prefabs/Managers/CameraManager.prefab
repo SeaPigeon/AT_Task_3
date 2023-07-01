@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activeCamera: {fileID: 0}
   _cameraList: []
-  _sceneManager: {fileID: 0}
   _gameManager: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1 &5430072813242295176
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 0
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -197,15 +197,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1894830939709090298, guid: 11faee1c68e3d2f40bce3c65cdfdabbc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.76
       objectReference: {fileID: 0}
     - target: {fileID: 1894830939709090298, guid: 11faee1c68e3d2f40bce3c65cdfdabbc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.452
       objectReference: {fileID: 0}
     - target: {fileID: 1894830939709090298, guid: 11faee1c68e3d2f40bce3c65cdfdabbc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.77
       objectReference: {fileID: 0}
     - target: {fileID: 1894830939709090298, guid: 11faee1c68e3d2f40bce3c65cdfdabbc, type: 3}
       propertyPath: m_LocalRotation.w
