@@ -59,7 +59,6 @@ public class DoorScript : MonoBehaviour
                 if (other.GetComponent<PlayerScript>().HasRedKeycard)
                 {
                     _currentDoorState = DoorState.Open;
-                    ToggleDoor();
                 }
                 break;
 
@@ -67,7 +66,6 @@ public class DoorScript : MonoBehaviour
                 if (other.GetComponent<PlayerScript>().HasBlueKeycard)
                 {
                     _currentDoorState = DoorState.Open;
-                    ToggleDoor();
                 }
                 break;
 
@@ -75,7 +73,6 @@ public class DoorScript : MonoBehaviour
                 if (other.GetComponent<PlayerScript>().HasYellowKeycard)
                 {
                     _currentDoorState = DoorState.Open;
-                    ToggleDoor();
                 }
                 break;
 
@@ -83,6 +80,8 @@ public class DoorScript : MonoBehaviour
                 Debug.Log("KeyCard Door Error");
                 break;
         }
+
+        ToggleDoor();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -98,7 +97,10 @@ public class DoorScript : MonoBehaviour
                     break;
 
                 case DoorType.KeyCardDoor:
-                    OpenKeyCardDoor(other);
+                    if (other.GetComponent<PlayerScript>())
+                    {
+                        OpenKeyCardDoor(other);
+                    }
                     break;
 
                 default:
