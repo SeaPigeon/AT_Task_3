@@ -12,7 +12,7 @@ public class AudioManagerScript : MonoBehaviour
     [SerializeField] private GameManagerScript _gameManager;
     [SerializeField] private AudioClip _currentAudioClipLoaded;
     [SerializeField] private bool _audioClipPlaying;
-    [SerializeField] private static AudioSource _audioSourceInstance;
+    [SerializeField] private AudioSource _audioSourceInstance;
 
     private static AudioManagerScript _audioManagerInstance = null;
 
@@ -52,6 +52,7 @@ public class AudioManagerScript : MonoBehaviour
     private void SetUpReferences()
     {
         _gameManager = GameManagerScript.GMInstance;
+        _audioSourceInstance = CameraManagerScript.CMInstance.GetComponentInChildren<Camera>().GetComponent<AudioSource>();
     }
     private void SetUpEvents()
     {
@@ -62,7 +63,7 @@ public class AudioManagerScript : MonoBehaviour
     {
         //_gameManager.CurrentAudioClipLoaded = _audioSourceInstance.clip;
         //_gameManager.AudioClipPlaying = _audioSourceInstance.isPlaying;
-        _audioSourceInstance = FindObjectOfType<AudioSource>();
+        //_audioSourceInstance = FindObjectOfType<AudioSource>();
     }
     public void PlayMusic(int clipIndex)
     {

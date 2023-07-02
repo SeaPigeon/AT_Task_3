@@ -65,14 +65,11 @@ public class CameraManagerScript : MonoBehaviour
             _gameManager.SceneLoadedIndex == 6)
         {
             ActivateCameraCinemachine(1);
-            //Debug.Log("Game Cam Active");
         }
         else
         {
             ActivateCameraCinemachine(0);
-            //Debug.Log("Menu Cam Active");
         }
-
         //Debug.Log("CameraManager CallFromGMEvent");
     }
 

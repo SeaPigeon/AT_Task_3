@@ -517,6 +517,18 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967263
       objectReference: {fileID: 0}
+    - target: {fileID: 1845512844911395896, guid: aaa6f5b17a6253a44b22242a16ded07c, type: 3}
+      propertyPath: _openingSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845512844911395896, guid: aaa6f5b17a6253a44b22242a16ded07c, type: 3}
+      propertyPath: _currentDoorState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845512846756988947, guid: aaa6f5b17a6253a44b22242a16ded07c, type: 3}
+      propertyPath: _openingSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3983501750314812592, guid: aaa6f5b17a6253a44b22242a16ded07c, type: 3}
       propertyPath: m_Name
       value: Level

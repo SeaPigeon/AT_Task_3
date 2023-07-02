@@ -25,11 +25,22 @@ public class DoorScript : MonoBehaviour
     [SerializeField] DoorType _doorType;
     [SerializeField] DoorColour _doorColour;
     [SerializeField] DoorState _currentDoorState;
+    [SerializeField] float _openingSpeed = 15;
+    [SerializeField] Vector3 _openPosition = new Vector3 (0, -2, 0);
+    [SerializeField] Vector3 _closedPosition = new Vector3(0, 2, 0);
+    [SerializeField] Vector3 _targetPosition;
+    [SerializeField] Transform _door;
     [SerializeField] List<Collider> _objectsInTrigger;
 
     // G&S
     public DoorState CurrentDoorState { get { return _currentDoorState; } }
-    void Start()
+
+    private void Awake()
+    {
+        _door = gameObject.transform.GetChild(0).transform;
+        _currentDoorState = DoorState.Closed;
+    }
+    private void Update()
     {
         ToggleDoor();
     }
@@ -37,18 +48,14 @@ public class DoorScript : MonoBehaviour
     {
         if (_currentDoorState == DoorState.Closed)
         {
-            var door = gameObject.transform.GetChild(0).transform;
-            door.position = new Vector3(door.position.x, door.localScale.y / 2, door.position.z);
-            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, -2, 0), 2 * Time.deltaTime);
+            _targetPosition = _closedPosition;
         }
         else if (_currentDoorState == DoorState.Open)
         {
-            var door = gameObject.transform.GetChild(0).transform;
-            door.position = new Vector3(door.position.x, -door.localScale.y / 2, door.position.z);
-            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 2, 0), 2 * Time.deltaTime);
+            _targetPosition = _openPosition;
         }
-        
-        
+
+        _door.localPosition = Vector3.MoveTowards(_door.localPosition, _targetPosition, _openingSpeed * Time.deltaTime);
     }
     
     private void OpenKeyCardDoor(Collider other)
@@ -80,8 +87,6 @@ public class DoorScript : MonoBehaviour
                 Debug.Log("KeyCard Door Error");
                 break;
         }
-
-        ToggleDoor();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -92,7 +97,6 @@ public class DoorScript : MonoBehaviour
             {
                 case DoorType.NormalDoor:
                     _currentDoorState = DoorState.Open;
-                    ToggleDoor();
                     break;
 
                 case DoorType.KeyCardDoor:
@@ -116,9 +120,7 @@ public class DoorScript : MonoBehaviour
             if (_objectsInTrigger.Count == 0)
             {
                 _currentDoorState = DoorState.Closed;
-                ToggleDoor();
             }
-            
         }
     }
 }

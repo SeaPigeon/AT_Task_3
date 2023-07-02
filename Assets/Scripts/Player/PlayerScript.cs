@@ -44,7 +44,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] SceneManagerScript _sceneManager;
     [SerializeField] InputManagerScript _inputManager;
     [SerializeField] LinkUIScript _UILinker;
-    //[SerializeField] AudioManagerScript _audioManager;
+    [SerializeField] AudioManagerScript _audioManager;
     [SerializeField] SpriteRenderer _playerSprite;
     [SerializeField] Transform _spawnPoint;
     [SerializeField] bool _isStrafing;
@@ -101,7 +101,7 @@ public class PlayerScript : MonoBehaviour
         _inputManager = InputManagerScript.IMInstance;
         _sceneManager = SceneManagerScript.SMInstance;
         _UILinker = UIManagerScript.UIMInstance.GetComponent<LinkUIScript>();
-        //_audioManager = AudioManagerScript.AMInstance;
+        _audioManager = AudioManagerScript.AMInstance;
         _playerSprite = GetComponentInChildren<SpriteRenderer>();
         _playerCC = gameObject.GetComponent<CharacterController>();
     }
@@ -147,19 +147,17 @@ public class PlayerScript : MonoBehaviour
         {
 
             SpawnPlayer();
-            //Debug.Log("Player Spawned from GMEvent: " + transform.position);
         }
         else
         {
             TogglePlayerSprite(false);
-            //Debug.Log("Player Toggled False from GMEvent: " + _playerSprite.enabled);
         }
     }
     public void ResetPlayer() 
     {
         CurrentHealth = _MAX_HEALTH;
         _gameManager.ResetScore();
-        SetUpStartingAmmo(10, 0, 0);
+        SetUpStartingAmmo(10, 5, 6);
     }
     public void TogglePlayerSprite(bool state)
     {
@@ -231,13 +229,29 @@ public class PlayerScript : MonoBehaviour
                 Instantiate(_activeWeapon, _firePoint.transform.position, _firePoint.transform.rotation);
                 _activeWeapon.GetComponent<BulletScript>().Ammo -= 1;
                 _UILinker.AmmoTextUI.text = _activeWeapon.GetComponent<BulletScript>().Ammo.ToString();
-                //_audioManager.PlaySFX(0);
+                PlaySoundOnFire();
                 Debug.Log("pew pew");
             }
         }
         else
         {
             AutoSwapWeapon(); 
+        }
+        
+    }
+    private void PlaySoundOnFire()
+    {
+        if (_activeWeapon == _weaponList[0])
+        {
+            _audioManager.PlaySFX(2);
+        }
+        else if (_activeWeapon == _weaponList[1])
+        {
+            _audioManager.PlaySFX(3);
+        }
+        else if (_activeWeapon == _weaponList[2])
+        {
+            _audioManager.PlaySFX(4);
         }
         
     }
@@ -273,6 +287,7 @@ public class PlayerScript : MonoBehaviour
             _activeWeaponIndex = index;
             _fireDelay = _weaponList[index].GetComponent<BulletScript>().FireDelay;
             _weaponSprite.sprite = _weaponList[index].GetComponent<BulletScript>().WeaponSprite;
+            LinkUI();
         }
     }
     private void SetUpStartingAmmo(int w1, int w2, int w3)
@@ -286,7 +301,22 @@ public class PlayerScript : MonoBehaviour
         _UILinker.HealthTextUI.text = _currentHealth.ToString();
         _UILinker.AmmoTextUI.text = _activeWeapon.GetComponent<BulletScript>().Ammo.ToString();
         _UILinker.ScoreTextUI.text = _gameManager.Score.ToString();
-        //_UILinker.WeaponTextUI = 
+        if (_activeWeapon == _weaponList[0])
+        {
+            _UILinker.WeaponTextUI.text = "Blaster";
+            _UILinker.ActiveWeaponUI.sprite = _weaponList[0].GetComponent<BulletScript>().WeaponSprite;
+        }
+        else if (_activeWeapon == _weaponList[1])
+        {
+            _UILinker.WeaponTextUI.text = "AR";
+            _UILinker.ActiveWeaponUI.sprite = _weaponList[1].GetComponent<BulletScript>().WeaponSprite;
+        }
+        else if (_activeWeapon == _weaponList[2])
+        {
+            _UILinker.WeaponTextUI.text = "Cannon";
+            _UILinker.ActiveWeaponUI.sprite = _weaponList[2].GetComponent<BulletScript>().WeaponSprite;
+
+        }
     }
     public void TakeDamage(int damage)
     {

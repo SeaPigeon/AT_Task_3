@@ -33,6 +33,14 @@ public class Pickup : MonoBehaviour
     [SerializeField] private Weapons _weaponToReload;
     [SerializeField] private KeycardColour _keyCardColour;
 
+    [Header("Debug")]
+    [SerializeField] LinkUIScript _UILinker;
+
+    private void Start()
+    {
+        _UILinker = UIManagerScript.UIMInstance.GetComponent<LinkUIScript>();
+    }
+
     private void RestoreHealth(PlayerScript player)
     {
         player.TakeDamage(-_healthRestored);
@@ -43,18 +51,22 @@ public class Pickup : MonoBehaviour
         {
             case Weapons.BaseWeapon:
                 other.GetComponent<PlayerScript>().WeaponList[0].GetComponent<BulletScript>().Reload(_ammoRestored);
+                _UILinker.AmmoTextUI.text = other.GetComponent<PlayerScript>().WeaponList[0].GetComponent<BulletScript>().Ammo.ToString();
                 Debug.Log("BaseWeapon Reloaded");
                 break;
             case Weapons.Weapon1:
                 other.GetComponent<PlayerScript>().WeaponList[1].GetComponent<BulletScript>().Reload(_ammoRestored);
+                _UILinker.AmmoTextUI.text = other.GetComponent<PlayerScript>().WeaponList[1].GetComponent<BulletScript>().Ammo.ToString();
                 Debug.Log("Weapon1 Reloaded");
                 break;
             case Weapons.Weapon2:
                 other.GetComponent<PlayerScript>().WeaponList[2].GetComponent<BulletScript>().Reload(_ammoRestored);
+                _UILinker.AmmoTextUI.text = other.GetComponent<PlayerScript>().WeaponList[2].GetComponent<BulletScript>().Ammo.ToString();
                 Debug.Log("Weapon2 Reloaded");
                 break;
             default:
                 other.GetComponent<PlayerScript>().WeaponList[0].GetComponent<BulletScript>().Reload(_ammoRestored);
+                _UILinker.AmmoTextUI.text = other.GetComponent<PlayerScript>().WeaponList[0].GetComponent<BulletScript>().Ammo.ToString();
                 Debug.Log("Default: BaseWeapon Reloaded");
                 break;
         }
@@ -65,12 +77,15 @@ public class Pickup : MonoBehaviour
         {
             case Weapons.BaseWeapon:
                 other.GetComponent<PlayerScript>().ActivateWeapon(0);
+                _UILinker.AmmoTextUI.text = other.GetComponent<PlayerScript>().WeaponList[0].GetComponent<BulletScript>().Ammo.ToString();
                 break;
             case Weapons.Weapon1:
                 other.GetComponent<PlayerScript>().ActivateWeapon(1);
+                _UILinker.AmmoTextUI.text = other.GetComponent<PlayerScript>().WeaponList[1].GetComponent<BulletScript>().Ammo.ToString();
                 break;
             case Weapons.Weapon2:
                 other.GetComponent<PlayerScript>().ActivateWeapon(2);
+                _UILinker.AmmoTextUI.text = other.GetComponent<PlayerScript>().WeaponList[2].GetComponent<BulletScript>().Ammo.ToString();
                 break;
             default:
                 other.GetComponent<PlayerScript>().ActivateWeapon(0);

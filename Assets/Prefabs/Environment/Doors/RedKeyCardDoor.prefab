@@ -61,6 +61,11 @@ MonoBehaviour:
   _doorType: 1
   _doorColour: 0
   _currentDoorState: 1
+  _openingSpeed: 15
+  _openPosition: {x: 0, y: -2, z: 0}
+  _closedPosition: {x: 0, y: 2, z: 0}
+  _targetPosition: {x: 0, y: 0, z: 0}
+  _door: {fileID: 0}
   _objectsInTrigger: []
 --- !u!1 &7858256362640967218
 GameObject:

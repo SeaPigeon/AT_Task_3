@@ -14,7 +14,8 @@ public class BulletScript : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] Rigidbody _bulletRB;
-    [SerializeField] AudioManagerScript _audioManager;
+    //[SerializeField] AudioManagerScript _audioManager;
+  
 
     public int BulletDamage { get { return _bulletDamage; } set { _bulletDamage = value; } }
     public int Ammo { get { return _currentAmmo; } set {_currentAmmo = value; } }
@@ -28,10 +29,8 @@ public class BulletScript : MonoBehaviour
 
     private void Start()
     {
-        _audioManager = AudioManagerScript.AMInstance;
         StartCoroutine(DestroyBullet());
         MoveBullet();
-        _audioManager.PlaySFX(0);
     }
 
     private void MoveBullet()
