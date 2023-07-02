@@ -116,7 +116,8 @@ MonoBehaviour:
   _enemyType: 2
   _currentState: 0
   _ACTIVATION_RANGE: 25
-  _MAX_HEALTH_BASE: 100
+  _deadSprite: {fileID: -4665405058300870328, guid: 7b959094932e4ed43ae5cd0f7457144b, type: 3}
+  _MAX_HEALTH_BASE: 200
   _POINT_VALUE_BASE: 1000
   _M_DAMAGE_BASE: 10
   _R_DAMAGE_BASE: 15
@@ -148,6 +149,7 @@ MonoBehaviour:
   _ATTACK_RANGE_BOSS: 15
   _gameManager: {fileID: 0}
   _sceneManager: {fileID: 0}
+  _audioManager: {fileID: 0}
   _UILinker: {fileID: 0}
   _player: {fileID: 0}
   _firePoint: {fileID: 6888254079514335411}

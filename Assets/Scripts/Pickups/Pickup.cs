@@ -34,10 +34,12 @@ public class Pickup : MonoBehaviour
     [SerializeField] private KeycardColour _keyCardColour;
 
     [Header("Debug")]
+    private AudioManagerScript _audioManager;
     [SerializeField] LinkUIScript _UILinker;
 
     private void Start()
     {
+        _audioManager = AudioManagerScript.AMInstance;
         _UILinker = UIManagerScript.UIMInstance.GetComponent<LinkUIScript>();
     }
 
@@ -91,7 +93,6 @@ public class Pickup : MonoBehaviour
                 other.GetComponent<PlayerScript>().ActivateWeapon(0);
                 break;
         }
-        
     }
     private void CollectKeyCard(Collider other)
     {
@@ -110,6 +111,7 @@ public class Pickup : MonoBehaviour
                 Debug.Log("Error Colour KeyCards");
                 break;
         }
+        _audioManager.PlayKeyCardSFX();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -119,23 +121,28 @@ public class Pickup : MonoBehaviour
             {
                 case PickUpType.Health:
                     RestoreHealth(other.GetComponent<PlayerScript>());
+                    _audioManager.PlayHealSFX();
                     break;
 
                 case PickUpType.Weapon:
                     Reload(other);
                     ActivateWeapon(other);
+                    _audioManager.PlayReloadSFX();
                     break;
 
                 case PickUpType.Ammo:
                     Reload(other);
+                    _audioManager.PlayReloadSFX();
                     break;
 
                 case PickUpType.Keycard:
                     CollectKeyCard(other);
+                    _audioManager.PlayKeyCardSFX();
                     break;
 
                 default:
                     RestoreHealth(other.GetComponent<PlayerScript>());
+                    _audioManager.PlayHealSFX();
                     Debug.Log("PickUp Error");
                     break;
             }

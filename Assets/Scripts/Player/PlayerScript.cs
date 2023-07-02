@@ -76,6 +76,7 @@ public class PlayerScript : MonoBehaviour
     private void Update()
     {
         Move(MovementInput);
+        Fire(_fireInput);
     }
 
     // G&S
@@ -139,6 +140,7 @@ public class PlayerScript : MonoBehaviour
         _hasRedKeycard = false;
         _hasBlueKeycard = false;
         _hasYellowKeycard = false;
+        _lastBulletTime = Time.time;
         LinkUI();
         FindSpawnPoint();
         if (_gameManager.SceneLoadedIndex == 4 ||
@@ -157,7 +159,8 @@ public class PlayerScript : MonoBehaviour
     {
         CurrentHealth = _MAX_HEALTH;
         _gameManager.ResetScore();
-        SetUpStartingAmmo(10, 5, 6);
+        _gameManager.Victory = false;
+        SetUpStartingAmmo(10, 0, 0);
     }
     public void TogglePlayerSprite(bool state)
     {
@@ -229,29 +232,13 @@ public class PlayerScript : MonoBehaviour
                 Instantiate(_activeWeapon, _firePoint.transform.position, _firePoint.transform.rotation);
                 _activeWeapon.GetComponent<BulletScript>().Ammo -= 1;
                 _UILinker.AmmoTextUI.text = _activeWeapon.GetComponent<BulletScript>().Ammo.ToString();
-                PlaySoundOnFire();
+                //PlaySoundOnFire();
                 Debug.Log("pew pew");
             }
         }
         else
         {
             AutoSwapWeapon(); 
-        }
-        
-    }
-    private void PlaySoundOnFire()
-    {
-        if (_activeWeapon == _weaponList[0])
-        {
-            _audioManager.PlaySFX(2);
-        }
-        else if (_activeWeapon == _weaponList[1])
-        {
-            _audioManager.PlaySFX(3);
-        }
-        else if (_activeWeapon == _weaponList[2])
-        {
-            _audioManager.PlaySFX(4);
         }
         
     }
@@ -270,13 +257,21 @@ public class PlayerScript : MonoBehaviour
     }
     private void AutoSwapWeapon()
     {
+        var count = 0;
         for (int i = 0; i < _weaponList.Length; i++)
         {
             if (_weaponList[i].GetComponent<BulletScript>().Ammo > 0)
             {
                 ActivateWeapon(i);
-                return;
             }
+            else
+            {
+                count += 1;
+            }
+        }
+        if (count == 3)
+        {
+            Debug.Log("NoAmmo");
         }
     }
     public void ActivateWeapon(int index)
@@ -320,6 +315,7 @@ public class PlayerScript : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+        _audioManager.PlayPlayerHurtSFX();
         _currentHealth -= damage;
         _UILinker.HealthTextUI.text = _currentHealth.ToString();
 
@@ -340,11 +336,8 @@ public class PlayerScript : MonoBehaviour
     private void OnButtonSouth(InputAction.CallbackContext context) 
     {
         _fireInput = context.ReadValueAsButton();
-        Fire(_fireInput);
-        if (_fireInput)
-        {
-            Debug.Log("SouthPlayer");
-        }        
+
+        Debug.Log("SouthPlayer");
     }
     private void OnButtonWest(InputAction.CallbackContext context) 
     {
@@ -389,7 +382,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<EnemyScript>())
+        if (other.GetComponent<EnemyScript>() && other.GetComponent<EnemyScript>().CurrentEnemyState != EnemyState.Dead)
         {
             TakeDamage(other.GetComponent<EnemyScript>().MDamage);
         }

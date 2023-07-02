@@ -12,20 +12,22 @@ public enum EnemyType
     StrongEnemy,
     Boss
 }
-public enum CurrentState
+public enum EnemyState
 {
     Inactive,
     Idle,
     Chase,
-    Shoot
+    Shoot,
+    Dead
 }
 
 public class EnemyScript : MonoBehaviour
 {
     [Header("Enemy Type")]
     [SerializeField] EnemyType _enemyType;
-    [SerializeField] CurrentState _currentState;
+    [SerializeField] EnemyState _currentState;
     [SerializeField] float _ACTIVATION_RANGE = 50;
+    [SerializeField] Sprite _deadSprite;
     [Header("BaseEnemy")]
     [SerializeField] int _MAX_HEALTH_BASE = 40;
     [SerializeField] int _POINT_VALUE_BASE = 100;
@@ -62,6 +64,7 @@ public class EnemyScript : MonoBehaviour
     [Header("Debug")]
     [SerializeField] GameManagerScript _gameManager;
     [SerializeField] SceneManagerScript _sceneManager;
+    [SerializeField] AudioManagerScript _audioManager;
     [SerializeField] LinkUIScript _UILinker;
     [SerializeField] PlayerScript _player;
     [SerializeField] GameObject _firePoint;
@@ -91,10 +94,12 @@ public class EnemyScript : MonoBehaviour
 
     // G&S
     public int MDamage { get { return _mDamage; } }
+    public EnemyState CurrentEnemyState { get { return _currentState; } }
     private void SetUpReferences()
     {
         _gameManager = GameManagerScript.GMInstance;
         _sceneManager = SceneManagerScript.SMInstance;
+        _audioManager = AudioManagerScript.AMInstance;
         _UILinker = UIManagerScript.UIMInstance.GetComponent<LinkUIScript>();
         _player = PlayerScript.PlayerInstance;
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -104,6 +109,7 @@ public class EnemyScript : MonoBehaviour
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _isPatrolling = false;
+        _currentState = EnemyState.Idle;
 
         switch (_enemyType)
         {
@@ -158,7 +164,7 @@ public class EnemyScript : MonoBehaviour
         }
         if (PlayerInRange(_ACTIVATION_RANGE))
         {
-            _currentState = CurrentState.Idle;
+            _currentState = EnemyState.Idle;
         }
     }
     private void Fire()
@@ -172,6 +178,7 @@ public class EnemyScript : MonoBehaviour
             
             instance = Instantiate(_bullet, _firePoint.transform.position, _player.transform.rotation);
             instance.GetComponent<EnemyBullet>().MoveDirection = PlayerDirection();
+            _audioManager.PlayEnemyAtkSFX();
             Debug.Log("Enemy pew pew");
         }
     }
@@ -211,56 +218,60 @@ public class EnemyScript : MonoBehaviour
     }
     private void Behaviour()
     {
-        if (PlayerInRange(_ACTIVATION_RANGE))
+        if (_currentState != EnemyState.Dead)
         {
-            if (PlayerInRange(_attackRange))
+            if (PlayerInRange(_ACTIVATION_RANGE))
             {
-                if (LoS())
+                if (PlayerInRange(_attackRange))
                 {
-                    _currentState = CurrentState.Shoot;
+                    if (LoS())
+                    {
+                        _currentState = EnemyState.Shoot;
+                    }
+                    else
+                    {
+                        _currentState = EnemyState.Chase;
+                    }
+
+                }
+                else if (PlayerInRange(_aggroRange))
+                {
+                    _currentState = EnemyState.Chase;
                 }
                 else
                 {
-                    _currentState = CurrentState.Chase;
+                    _currentState = EnemyState.Idle;
                 }
-                
-            }
-            else if (PlayerInRange(_aggroRange))
-            {
-                _currentState = CurrentState.Chase;
             }
             else
             {
-                _currentState = CurrentState.Idle;
+                _currentState = EnemyState.Inactive;
+            }
+
+            switch (_currentState)
+            {
+                case EnemyState.Idle:
+                    Idle();
+                    //Debug.Log("Idle Enemy");
+                    break;
+                case EnemyState.Chase:
+                    Chase();
+                    //Debug.Log("Chase Enemy");
+                    break;
+                case EnemyState.Shoot:
+                    Fire();
+                    //Debug.Log("Fire Enemy");
+                    break;
+                case EnemyState.Inactive:
+                    _navMeshAgent.isStopped = true;
+                    break;
+                default:
+                    _navMeshAgent.isStopped = true;
+                    //Debug.Log("Inactive Enemy ERROR");
+                    break;
             }
         }
-        else
-        {
-            _currentState = CurrentState.Inactive;
-        }
-
-        switch (_currentState)
-        {
-            case CurrentState.Idle:
-                Idle();
-                //Debug.Log("Idle Enemy");
-                break;
-            case CurrentState.Chase:
-                Chase();
-                //Debug.Log("Chase Enemy");
-                break;
-            case CurrentState.Shoot:
-                Fire();
-                //Debug.Log("Fire Enemy");
-                break;
-            case CurrentState.Inactive:
-                _navMeshAgent.isStopped = true;
-                break;
-            default:
-                _navMeshAgent.isStopped = true;
-                //Debug.Log("Inactive Enemy ERROR");
-                break;
-        }
+        
     }
     private Vector3 PlayerDirection()
     {
@@ -303,21 +314,38 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         _currentHealth -= dmg;
+        switch (_enemyType)
+        {
+            case EnemyType.BaseEnemy:
+                _audioManager.PlayEnemyBaseTakeDamageSFX();
+                break;
+            case EnemyType.StrongEnemy:
+                _audioManager.PlayEnemyStrongTakeDamageSFX();
+                break;
+            case EnemyType.Boss:
+                _audioManager.PlayBossTakeDamageSFX();
+                break;
+            default:
+                _audioManager.PlayEnemyBaseTakeDamageSFX();
+                Debug.Log("EnemyTakeDamageSFXError");
+                break;
+        }
 
         if (_currentHealth <= 0)
         {
+            Debug.Log("dfsdfsdfsfsd");
             _gameManager.ChangeScore(_pointValue);
             _UILinker.ScoreTextUI.text = _gameManager.Score.ToString();
+            _currentState = EnemyState.Dead;
+            GetComponent<SpriteRenderer>().sprite = _deadSprite;
 
-            if (_enemyType != EnemyType.Boss)
-            {
-                Destroy(gameObject);
-            }
-            else
+            if (_enemyType == EnemyType.Boss)
             {
                 _sceneManager.LoadScene("EndGameScene");
                 _UILinker.ScoreEndScreenUI.text = "Score: " + _gameManager.Score.ToString();
-            } 
+                _gameManager.Victory = true;
+            }
+            
         }
     }
     private void OnTriggerEnter(Collider other)

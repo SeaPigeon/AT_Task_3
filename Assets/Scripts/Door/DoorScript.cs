@@ -32,6 +32,8 @@ public class DoorScript : MonoBehaviour
     [SerializeField] Transform _door;
     [SerializeField] List<Collider> _objectsInTrigger;
 
+    [SerializeField] AudioManagerScript _audioManager;
+
     // G&S
     public DoorState CurrentDoorState { get { return _currentDoorState; } }
 
@@ -39,6 +41,10 @@ public class DoorScript : MonoBehaviour
     {
         _door = gameObject.transform.GetChild(0).transform;
         _currentDoorState = DoorState.Closed;
+    }
+    private void Start()
+    {
+        _audioManager = AudioManagerScript.AMInstance;
     }
     private void Update()
     {
@@ -56,6 +62,7 @@ public class DoorScript : MonoBehaviour
         }
 
         _door.localPosition = Vector3.MoveTowards(_door.localPosition, _targetPosition, _openingSpeed * Time.deltaTime);
+        
     }
     
     private void OpenKeyCardDoor(Collider other)
@@ -66,6 +73,7 @@ public class DoorScript : MonoBehaviour
                 if (other.GetComponent<PlayerScript>().HasRedKeycard)
                 {
                     _currentDoorState = DoorState.Open;
+                    _audioManager.PlayDoorSFX();
                 }
                 break;
 
@@ -73,6 +81,7 @@ public class DoorScript : MonoBehaviour
                 if (other.GetComponent<PlayerScript>().HasBlueKeycard)
                 {
                     _currentDoorState = DoorState.Open;
+                    _audioManager.PlayDoorSFX();
                 }
                 break;
 
@@ -80,6 +89,7 @@ public class DoorScript : MonoBehaviour
                 if (other.GetComponent<PlayerScript>().HasYellowKeycard)
                 {
                     _currentDoorState = DoorState.Open;
+                    _audioManager.PlayDoorSFX();
                 }
                 break;
 
@@ -97,6 +107,7 @@ public class DoorScript : MonoBehaviour
             {
                 case DoorType.NormalDoor:
                     _currentDoorState = DoorState.Open;
+                    _audioManager.PlayDoorSFX();
                     break;
 
                 case DoorType.KeyCardDoor:
@@ -120,6 +131,7 @@ public class DoorScript : MonoBehaviour
             if (_objectsInTrigger.Count == 0)
             {
                 _currentDoorState = DoorState.Closed;
+                _audioManager.PlayDoorSFX();
             }
         }
     }

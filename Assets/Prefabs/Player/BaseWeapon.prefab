@@ -127,11 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b854b023003244caa95fb0f4d35415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletLifeSpan: 0.5
+  _bulletLifeSpan: 1
   _bulletSpeed: 15
   _bulletDamage: 10
   _currentAmmo: 10
-  _fireDelay: 1
+  _fireDelay: 0.7
   _weaponSprite: {fileID: 21300000, guid: c102a2c9789dd624e91125c3c82eb7bb, type: 3}
   _bulletRB: {fileID: 0}
 --- !u!114 &1829608728530452450
@@ -146,3 +146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec88c29ba84e2fa4b8f671838ba6a1c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sprite: {fileID: 0}

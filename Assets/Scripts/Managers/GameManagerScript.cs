@@ -25,6 +25,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] AudioClip _currentAudioClipLoaded;
     [SerializeField] bool _audioClipPlaying;
     [SerializeField] int _score;
+    [SerializeField] bool _victory;
 
     public event Action OnGMSetUpComplete;
 
@@ -53,6 +54,7 @@ public class GameManagerScript : MonoBehaviour
     public AudioClip CurrentAudioClipLoaded { get { return _currentAudioClipLoaded; } set { _currentAudioClipLoaded = value; } }
     public bool AudioClipPlaying { get { return _audioClipPlaying; } set { _audioClipPlaying = value; } }
     public int Score { get { return _score; } set { _score = value; } }
+    public bool Victory { get { return _victory; } set { _victory = value; } }
 
     // Methods
     private void GameManagerSingleton()
@@ -78,6 +80,7 @@ public class GameManagerScript : MonoBehaviour
         ActiveSceneName = SceneManager.GetActiveScene().name;
         SceneLoadedIndex = SceneManager.GetActiveScene().buildIndex;
         SetGameState();
+        _victory = false;
         OnGMSetUpComplete?.Invoke();
         //Debug.Log("GameManager SetUp");
     }
@@ -106,7 +109,7 @@ public class GameManagerScript : MonoBehaviour
         }
         else if (ActiveScene.name == "LevelEditor")
         {
-            ActiveGameState = GameState.InMenu;
+            ActiveGameState = GameState.InEditor;
         }
         else if (ActiveScene.name == "Level_1" || 
                  ActiveScene.name == "Level_2" ||
