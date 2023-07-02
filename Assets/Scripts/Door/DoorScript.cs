@@ -88,7 +88,6 @@ public class DoorScript : MonoBehaviour
         if (other.GetComponent<PlayerScript>() || other.GetComponent<EnemyScript>())
         {
             _objectsInTrigger.Add(other);
-            Debug.Log("Detected");
             switch (_doorType)
             {
                 case DoorType.NormalDoor:

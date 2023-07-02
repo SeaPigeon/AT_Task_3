@@ -112,22 +112,22 @@ public class PlayerScript : MonoBehaviour
     public void SubscribeGameInputs()
     {
         _inputManager.InputMap.Game.Move.performed += OnMove;
-        _inputManager.InputMap.Game.South.started += OnSouth;
-        _inputManager.InputMap.Game.West.started += OnWest;
-        //_inputManager.InputMap.Game.North.performed += OnNorth;
-        //_inputManager.InputMap.Game.East.performed += OnEast;
-        _inputManager.InputMap.Game.SR.started += OnSR;
-        _inputManager.InputMap.Game.SL.started += OnSL;
-        //_inputManager.InputMap.Game.Start.performed += OnStart;
+        _inputManager.InputMap.Game.ButtonSouth.started += OnButtonSouth;
+        _inputManager.InputMap.Game.ButtonWest.started += OnButtonWest;
+        //_inputManager.InputMap.Game.ButtonNorth.performed += OnButtonNorth;
+        //_inputManager.InputMap.Game.ButtonEast.performed += OnButtonEast;
+        _inputManager.InputMap.Game.ShoulderR.started += OnShoulderR;
+        _inputManager.InputMap.Game.ShoulderL.started += OnShoulderL;
+        //_inputManager.InputMap.Game.StartButton.performed += OnStartButton;
 
         _inputManager.InputMap.Game.Move.canceled += OnMove;
-        _inputManager.InputMap.Game.South.canceled += OnSouth;
-        _inputManager.InputMap.Game.West.canceled += OnWest;
-        //_inputManager.InputMap.Game.North.canceled += OnNorth;
-        //_inputManager.InputMap.Game.East.canceled += OnEast;
-        _inputManager.InputMap.Game.SR.canceled += OnSR;
-        _inputManager.InputMap.Game.SL.canceled += OnSL;
-        //_inputManager.InputMap.Game.Start.canceled += OnStart;
+        _inputManager.InputMap.Game.ButtonSouth.canceled += OnButtonSouth;
+        _inputManager.InputMap.Game.ButtonWest.canceled += OnButtonWest;
+        //_inputManager.InputMap.Game.ButtonNorth.canceled += OnButtonNorth;
+        //_inputManager.InputMap.Game.ButtonEast.canceled += OnButtonEast;
+        _inputManager.InputMap.Game.ShoulderR.canceled += OnShoulderR;
+        _inputManager.InputMap.Game.ShoulderL.canceled += OnShoulderL;
+        //_inputManager.InputMap.Game.StartButton.canceled += OnStartButton;
     }
     private void SetUpPlayer()
     {
@@ -307,7 +307,7 @@ public class PlayerScript : MonoBehaviour
         MovementInput = context.ReadValue<Vector2>();
         Debug.Log("MovePlayer");
     }
-    private void OnSouth(InputAction.CallbackContext context) 
+    private void OnButtonSouth(InputAction.CallbackContext context) 
     {
         _fireInput = context.ReadValueAsButton();
         Fire(_fireInput);
@@ -316,26 +316,21 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("SouthPlayer");
         }        
     }
-    private void OnWest(InputAction.CallbackContext context) 
+    private void OnButtonWest(InputAction.CallbackContext context) 
     {
         _westButtonInput = context.ReadValueAsButton();
         _isStrafing = _westButtonInput;
-        /*if (_westButtonInput)
-        {
-            TakeDamage(30);
-            Debug.Log("Damage Taken");
-        }*/
         Debug.Log("WestPlayer");
     }
-    private void OnNorth(InputAction.CallbackContext context) 
+    private void OnButtonNorth(InputAction.CallbackContext context) 
     {
         Debug.Log("NorthPlayer");
     }
-    private void OnEast(InputAction.CallbackContext context) 
+    private void OnButtonEast(InputAction.CallbackContext context) 
     {
         Debug.Log("EastPlayer");
     }
-    private void OnSR(InputAction.CallbackContext context) 
+    private void OnShoulderR(InputAction.CallbackContext context) 
     {
         _RSInput = context.ReadValueAsButton();
       
@@ -346,7 +341,7 @@ public class PlayerScript : MonoBehaviour
         
         Debug.Log("ShoulderRPlayer");
     }
-    private void OnSL(InputAction.CallbackContext context) 
+    private void OnShoulderL(InputAction.CallbackContext context) 
     {
         _LSInput = context.ReadValueAsButton();
  
@@ -357,7 +352,7 @@ public class PlayerScript : MonoBehaviour
         
         Debug.Log("ShoulderLPlayer");
     }
-    private void OnStart(InputAction.CallbackContext context) 
+    private void OnStartButton(InputAction.CallbackContext context) 
     {
         Debug.Log("StartPlayer");
     }

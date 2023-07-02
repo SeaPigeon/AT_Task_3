@@ -9,7 +9,7 @@ public class InputManagerScript : MonoBehaviour
 {
     private static InputManagerScript _inputManagerInstance = null;
 
-    private InputMap _inputMap;
+    private NewInputMap _inputMap;
     [SerializeField] private InputActionMap _activeInputMap;
     [SerializeField] private GameManagerScript _gameManager;
 
@@ -45,7 +45,7 @@ public class InputManagerScript : MonoBehaviour
     public bool ShoulderRInput { get { return _shoulderRInput; } set { _shoulderRInput = value; } }
     public bool ShoulderLInput { get { return _shoulderLInput; } set { _shoulderLInput = value; } }
     public bool StartInput { get { return _startInput; } set { _startInput = value; } }
-    public InputMap InputMap {get { return _inputMap; } }
+    public NewInputMap InputMap {get { return _inputMap; } }
     public InputActionMap ActiveInputMap { get { return _activeInputMap; } set { _activeInputMap = value; } }
 
     // Methods
@@ -75,7 +75,7 @@ public class InputManagerScript : MonoBehaviour
     {
         if (_inputMap == null)
         {
-            _inputMap = new InputMap();
+            _inputMap = new NewInputMap();
             SubscribeUIInputs();
             PlayerScript.PlayerInstance.SubscribeGameInputs();
         }
@@ -96,23 +96,23 @@ public class InputManagerScript : MonoBehaviour
     {
         //_player.UnsubscribeGameInputs();
 
-        _inputMap.UI.DPad.started += OnDpad;
+        _inputMap.UI.Move.started += OnMove;
         //_inputMap.UI.ButtonSouth.started += OnButtonSouth;
         _inputMap.UI.ButtonWest.performed += OnButtonWest;
         _inputMap.UI.ButtonNorth.performed += OnButtonNorth;
         _inputMap.UI.ButtonEast.performed += OnButtonEast;
         _inputMap.UI.ShoulderR.performed += OnShoulderR;
         _inputMap.UI.ShoulderL.performed += OnShoulderL;
-        _inputMap.UI.StartButton.performed += OnStart;
+        _inputMap.UI.StartButton.performed += OnStartButton;
 
-        //_inputMap.UI.DPad.canceled += OnDpad;
+        //_inputMap.UI.Move.canceled += OnMove;
         _inputMap.UI.ButtonSouth.canceled += OnButtonSouth;
         //_inputMap.UI.ButtonWest.canceled += OnButtonWest;
         //_inputMap.UI.ButtonNorth.canceled += OnButtonNorth;
         //_inputMap.UI.ButtonEast.canceled += OnButtonEast;
         //_inputMap.UI.ShoulderR.canceled += OnShoulderR;
         //_inputMap.UI.ShoulderL.canceled += OnShoulderL;
-        //_inputMap.UI.StartButton.canceled += OnStart;
+        //_inputMap.UI.StartButton.canceled += OnStartButton;
     }
     public void ActivateInputMap(InputActionMap map)
     {
@@ -122,7 +122,7 @@ public class InputManagerScript : MonoBehaviour
     }
 
     // UI Inputs Functions
-    private void OnDpad(InputAction.CallbackContext context) 
+    private void OnMove(InputAction.CallbackContext context) 
     {
         //DPadInput = context.ReadValue<Vector2>();
         Debug.Log("DPadUI Input Log");
@@ -156,7 +156,7 @@ public class InputManagerScript : MonoBehaviour
         //ShoulderLInput = context.ReadValueAsButton();
         Debug.Log("SLUI");
     }
-    private void OnStart(InputAction.CallbackContext context) 
+    private void OnStartButton(InputAction.CallbackContext context) 
     {
         //StartInput = context.ReadValueAsButton();
         Debug.Log("StartUI");
