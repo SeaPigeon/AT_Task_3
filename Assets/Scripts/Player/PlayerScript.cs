@@ -182,22 +182,12 @@ public class PlayerScript : MonoBehaviour
     }
     public void MoveToSpawnPoint(Vector3 pos)
     {
+        Debug.Log("Player Spawned from GMEvent Before: " + transform.position);
+
         transform.position = new Vector3(pos.x, pos.y, pos.z);
-        /*if (_spawnPoint != null)
-        {
-            transform.position = new Vector3(pos.x, pos.y, pos.z);
+        //transform.Translate(new Vector3(pos.x, pos.y, pos.z));
 
-
-            gameObject.transform.rotation = new Quaternion(pos.x,
-                                                           pos.y,
-                                                           pos.z,
-                                                           pos.w);
-        }
-        else
-        {
-            Debug.Log("Spawn Error");
-        }*/
-        Debug.Log("Player Spawned from GMEvent: " + transform.position);
+        Debug.Log("Player Spawned from GMEvent After: " + transform.position);
     }
     public void SpawnPlayer(Vector3 pos)
     {
@@ -226,8 +216,6 @@ public class PlayerScript : MonoBehaviour
             _playerCC.Move(_appliedMoveVector * Time.deltaTime);
             gameObject.transform.Rotate(new Vector3(0, input.x * _rotationSpeed * Time.deltaTime, 0));
         }
-        
-
     }
     private void Strafe(Vector2 input)
     {

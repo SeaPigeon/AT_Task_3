@@ -24,7 +24,7 @@ public class EndPointScript : MonoBehaviour
     }
     private void SetUpReferences()
     {
-        _sceneManager = SceneManagerScript.SMInstance.GetComponent<SceneManagerScript>();
+        _sceneManager = SceneManagerScript.SMInstance;
     }
 
     private void LoadScene()
@@ -58,10 +58,13 @@ public class EndPointScript : MonoBehaviour
             case Scenes.Level_3:
                 LoadLevel3Scene();
                 break;
+
             case Scenes.EndScreen:
                 LoadEndGameScreen();
                 break;
+
             default:
+                LoadDebugScene();
                 break;
         }
     }

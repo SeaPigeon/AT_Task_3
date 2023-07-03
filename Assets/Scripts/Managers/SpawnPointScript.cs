@@ -72,10 +72,10 @@ public class SpawnPointScript : MonoBehaviour
                 Debug.Log("MoveSP scene index default case: " + SceneManager.GetActiveScene().buildIndex);
                 break;
         }
-        Debug.Log("1: " + transform.position);
+        //Debug.Log("1: " + transform.position);
         transform.position = newPos;
-        Debug.Log("2: " + transform.position);
+        //Debug.Log("2: " + transform.position);
         _player.SpawnPlayer(transform.position);
-        Debug.Log("3: " + transform.position);
+        //Debug.Log("3: " + transform.position);
     }
 }
