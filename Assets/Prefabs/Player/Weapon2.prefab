@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletType: 1
-  _bulletLifeSpan: 0.5
+  _bulletLifeSpan: 0.8
   _bulletSpeed: 25
   _bulletDamage: 5
   _currentAmmo: 0

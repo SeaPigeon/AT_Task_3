@@ -59,6 +59,7 @@ public class AudioManagerScript : MonoBehaviour
     }
     private void SetUpEvents()
     {
+        _gameManager.OnGMSetUpComplete -= SetUpAudioManager;
         _gameManager.OnGMSetUpComplete += SetUpAudioManager;
     }
 

@@ -88,7 +88,7 @@ public class LinkUIScript : MonoBehaviour
     [SerializeField] Image _weaponImage;
     [SerializeField] Text _weaponText;
 
-    //[SerializeField] Sprite _gameBGImage;
+    [SerializeField] Sprite _gameBGImage;
 
     [SerializeField] Sprite _healthSprite;
     [SerializeField] Sprite _ammoSprite;
@@ -130,6 +130,7 @@ public class LinkUIScript : MonoBehaviour
     }
     private void SubscribeEvents()
     {
+        _gameManager.OnGMSetUpComplete -= SetUpUI;
         _gameManager.OnGMSetUpComplete += SetUpUI;
     }
     private void SetUpUI()
@@ -180,10 +181,10 @@ public class LinkUIScript : MonoBehaviour
         _endBG.sprite = _engBGImage;
         _endTitle.sprite = _endTitleImage;
         _endTitleText.text = _endTitleString;
-        //_endScoreBG.sprite = _endScoreBGSprite;
+        _endScoreBG.sprite = _endScoreBGSprite;
 
         // Game
-        //_gameBG.sprite = _gameBGImage;
+        _gameBG.sprite = _gameBGImage;
 
         _healthImage.sprite = _healthSprite;
         _ammoImage.sprite = _ammoSprite;

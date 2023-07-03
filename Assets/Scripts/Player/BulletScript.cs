@@ -33,19 +33,8 @@ public class BulletScript : MonoBehaviour
     private void Awake()
     {
         _bulletRB = gameObject.GetComponent<Rigidbody>();
-        _audioManager = AudioManagerScript.AMInstance; 
-        if (_bulletType == BulletType.Base)
-        {
-            _audioManager.PlayWeaponBSFX();
-        }
-        else if (_bulletType == BulletType.W2)
-        {
-            _audioManager.PlayWeapon2SFX();
-        }
-        else if (_bulletType == BulletType.W3)
-        {
-            _audioManager.PlayWeapon3SFX();
-        }
+        _audioManager = AudioManagerScript.AMInstance;
+        PlaySound();
     }
 
     private void Start()
@@ -68,6 +57,22 @@ public class BulletScript : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(_bulletLifeSpan);
         Destroy(gameObject);
+    }
+
+    private void PlaySound()
+    {
+        if (_bulletType == BulletType.Base)
+        {
+            _audioManager.PlayWeaponBSFX();
+        }
+        else if (_bulletType == BulletType.W2)
+        {
+            _audioManager.PlayWeapon2SFX();
+        }
+        else if (_bulletType == BulletType.W3)
+        {
+            _audioManager.PlayWeapon3SFX();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

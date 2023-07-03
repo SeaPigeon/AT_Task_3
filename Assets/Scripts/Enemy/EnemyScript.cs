@@ -338,11 +338,13 @@ public class EnemyScript : MonoBehaviour
             _UILinker.ScoreTextUI.text = _gameManager.Score.ToString();
             _currentState = EnemyState.Dead;
             GetComponent<SpriteRenderer>().sprite = _deadSprite;
+            GetComponent<Collider>().enabled = false;
+            _navMeshAgent.isStopped = true;
 
             if (_enemyType == EnemyType.Boss)
             {
                 _sceneManager.LoadScene("EndGameScene");
-                _UILinker.ScoreEndScreenUI.text = "Score: " + _gameManager.Score.ToString();
+                _UILinker.ScoreEndScreenUI.text = _gameManager.Score.ToString();
                 _gameManager.Victory = true;
             }
             

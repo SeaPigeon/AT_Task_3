@@ -82,9 +82,9 @@ MonoBehaviour:
   _mainMenuBG: {fileID: 5364404061805384980}
   _mainMenuTitle: {fileID: 5287255489885803657}
   _mainMenuTitleText: {fileID: 5287255489428414220}
-  _mainMenuBGImage: {fileID: 21300000, guid: d7372407bc5077e48ac061fa237f2389, type: 3}
-  _mainMenuTitleImage: {fileID: 21300000, guid: c3fa3243edaa08947ba964bf2305d18e, type: 3}
-  _mainMenuTitleString: Game Title
+  _mainMenuBGImage: {fileID: 21300000, guid: 6b4a052d0229a0647876fddd906252a0, type: 3}
+  _mainMenuTitleImage: {fileID: 21300000, guid: de76ecd4c500b7e4ca4d5c06eaf87a21, type: 3}
+  _mainMenuTitleString: AT-Tack!
   _controlsBG: {fileID: 156382295704972553}
   _controlsTitle: {fileID: 5457971417319254554}
   _controlsTitleText: {fileID: 5457971417930620929}
@@ -106,8 +106,8 @@ MonoBehaviour:
   _lsButtonImage: {fileID: 4810457277376797674}
   _rsButtonImage: {fileID: 6668414480852887808}
   _weaponSwapText: {fileID: 3968878750943801530}
-  _controlsBGImage: {fileID: 21300000, guid: d7372407bc5077e48ac061fa237f2389, type: 3}
-  _controlsTitleImage: {fileID: 21300000, guid: c3fa3243edaa08947ba964bf2305d18e, type: 3}
+  _controlsBGImage: {fileID: 21300000, guid: 6b4a052d0229a0647876fddd906252a0, type: 3}
+  _controlsTitleImage: {fileID: 21300000, guid: de76ecd4c500b7e4ca4d5c06eaf87a21, type: 3}
   _controlsTitleString: Controls
   _wButtonSprite: {fileID: 21300000, guid: d10f20bbd8528cf4987f0cb69b72f840, type: 3}
   _aButtonSprite: {fileID: 21300000, guid: eb7ca64641c2c32449593cd5b274a750, type: 3}
@@ -136,6 +136,7 @@ MonoBehaviour:
   _scoreText: {fileID: 5556974905071521387}
   _weaponImage: {fileID: 4565523729541752428}
   _weaponText: {fileID: 7769488190401594922}
+  _gameBGImage: {fileID: 21300000, guid: 6592c1a18e8a87244ab324262b754c2d, type: 3}
   _healthSprite: {fileID: 21300000, guid: 7707a84fe57758e40904fa8529b5665d, type: 3}
   _ammoSprite: {fileID: 21300000, guid: 4c387eaa194f6eb4e985395be77a6132, type: 3}
   _scoreSprite: {fileID: 21300000, guid: 900f291aa6b31d04d954b4c7d85d0011, type: 3}
@@ -143,18 +144,18 @@ MonoBehaviour:
   _editorBG: {fileID: 8507501678019597718}
   _editorTitle: {fileID: 7896323645469140202}
   _editorTitleText: {fileID: 7896323644577558223}
-  _editorBGImage: {fileID: 21300000, guid: d7372407bc5077e48ac061fa237f2389, type: 3}
-  _editorTitleImage: {fileID: 21300000, guid: c3fa3243edaa08947ba964bf2305d18e, type: 3}
+  _editorBGImage: {fileID: 21300000, guid: 6b4a052d0229a0647876fddd906252a0, type: 3}
+  _editorTitleImage: {fileID: 21300000, guid: de76ecd4c500b7e4ca4d5c06eaf87a21, type: 3}
   _editorTitleString: Level Editor
   _endBG: {fileID: 4308648825390686576}
   _endTitle: {fileID: 1095545959534877065}
   _endTitleText: {fileID: 1848062872272581490}
   _endScoreBG: {fileID: 941087087989095734}
   _endScoreBGText: {fileID: 6585479218133646174}
-  _engBGImage: {fileID: 21300000, guid: d7372407bc5077e48ac061fa237f2389, type: 3}
-  _endTitleImage: {fileID: 21300000, guid: c3fa3243edaa08947ba964bf2305d18e, type: 3}
+  _engBGImage: {fileID: 21300000, guid: 6b4a052d0229a0647876fddd906252a0, type: 3}
+  _endTitleImage: {fileID: 21300000, guid: de76ecd4c500b7e4ca4d5c06eaf87a21, type: 3}
   _endTitleString: Game Over
-  _endScoreBGSprite: {fileID: 21300000, guid: c3fa3243edaa08947ba964bf2305d18e, type: 3}
+  _endScoreBGSprite: {fileID: 21300000, guid: c52ea0f6cccb8f444871595329b24ba6, type: 3}
   _gameManager: {fileID: 0}
 --- !u!1001 &3644632136292132103
 PrefabInstance:

@@ -51,6 +51,7 @@ public class UIManagerScript : MonoBehaviour
     }
     private void SubscribeToEvents()
     {
+        _gameManager.OnGMSetUpComplete -= SetUpStartingCanvas;
         _gameManager.OnGMSetUpComplete += SetUpStartingCanvas;
     }
     

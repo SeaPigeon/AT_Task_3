@@ -48,6 +48,7 @@ public class CameraManagerScript : MonoBehaviour
     }
     private void SetUpEvents()
     {
+        _gameManager.OnGMSetUpComplete -= SetUpCameraManager;
         _gameManager.OnGMSetUpComplete += SetUpCameraManager;
     }
     

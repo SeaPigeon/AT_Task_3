@@ -68,6 +68,9 @@ public class InputManagerScript : MonoBehaviour
     }
     private void SubscribeToEvents()
     {
+        OnInputMapTransitionEvent -= ActivateInputMap;
+        _gameManager.OnGMSetUpComplete -= SetUpStartingInputMap;
+
         OnInputMapTransitionEvent += ActivateInputMap;
         _gameManager.OnGMSetUpComplete += SetUpStartingInputMap;
     }
@@ -94,7 +97,16 @@ public class InputManagerScript : MonoBehaviour
     }
     public void SubscribeUIInputs()
     {
-        //_player.UnsubscribeGameInputs();
+        _inputMap.UI.Move.started += OnMove;
+        
+        _inputMap.UI.ButtonWest.performed -= OnButtonWest;
+        _inputMap.UI.ButtonNorth.performed -= OnButtonNorth;
+        _inputMap.UI.ButtonEast.performed -= OnButtonEast;
+        _inputMap.UI.ShoulderR.performed -= OnShoulderR;
+        _inputMap.UI.ShoulderL.performed -= OnShoulderL;
+        _inputMap.UI.StartButton.performed -= OnStartButton;
+
+        _inputMap.UI.ButtonSouth.canceled -= OnButtonSouth;
 
         _inputMap.UI.Move.started += OnMove;
         //_inputMap.UI.ButtonSouth.started += OnButtonSouth;

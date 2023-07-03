@@ -72,6 +72,7 @@ public class GameManagerScript : MonoBehaviour
     }
     private void SubscribeToEvents()
     {
+        SceneManager.sceneLoaded -= SetUpGame;
         SceneManager.sceneLoaded += SetUpGame;
     }
     private void SetUpGame()
@@ -91,7 +92,6 @@ public class GameManagerScript : MonoBehaviour
         SceneLoadedIndex = SceneManager.GetActiveScene().buildIndex;
         SetGameState();
         OnGMSetUpComplete?.Invoke();
-        ResetScore();
     }
     public void SetGameState()
     {

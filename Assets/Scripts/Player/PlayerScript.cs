@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         SetUpReferences();
-        SetUpEvents();
+        SubscribeToEvents();
         ResetPlayer();
     }
 
@@ -106,12 +107,25 @@ public class PlayerScript : MonoBehaviour
         _playerSprite = GetComponentInChildren<SpriteRenderer>();
         _playerCC = gameObject.GetComponent<CharacterController>();
     }
-    private void SetUpEvents()
+    private void SubscribeToEvents()
     {
+        _gameManager.OnGMSetUpComplete -= SetUpPlayer;
         _gameManager.OnGMSetUpComplete += SetUpPlayer;
     }
     public void SubscribeGameInputs()
     {
+        _inputManager.InputMap.Game.Move.performed -= OnMove;
+        _inputManager.InputMap.Game.ButtonSouth.started -= OnButtonSouth;
+        _inputManager.InputMap.Game.ButtonWest.started -= OnButtonWest;
+        _inputManager.InputMap.Game.ShoulderR.started -= OnShoulderR;
+        _inputManager.InputMap.Game.ShoulderL.started -= OnShoulderL;
+
+        _inputManager.InputMap.Game.Move.canceled -= OnMove;
+        _inputManager.InputMap.Game.ButtonSouth.canceled -= OnButtonSouth;
+        _inputManager.InputMap.Game.ButtonWest.canceled -= OnButtonWest;
+        _inputManager.InputMap.Game.ShoulderR.canceled -= OnShoulderR;
+        _inputManager.InputMap.Game.ShoulderL.canceled -= OnShoulderL;
+
         _inputManager.InputMap.Game.Move.performed += OnMove;
         _inputManager.InputMap.Game.ButtonSouth.started += OnButtonSouth;
         _inputManager.InputMap.Game.ButtonWest.started += OnButtonWest;
@@ -142,10 +156,10 @@ public class PlayerScript : MonoBehaviour
         _hasYellowKeycard = false;
         _lastBulletTime = Time.time;
         LinkUI();
-        FindSpawnPoint();
-        if (_gameManager.SceneLoadedIndex == 4 ||
-            _gameManager.SceneLoadedIndex == 5 ||
-            _gameManager.SceneLoadedIndex == 6)
+        /*FindSpawnPoint();
+        if (SceneManager.GetActiveScene().buildIndex == 4 ||
+            SceneManager.GetActiveScene().buildIndex == 5 ||
+            SceneManager.GetActiveScene().buildIndex == 6)
         {
 
             SpawnPlayer();
@@ -153,7 +167,7 @@ public class PlayerScript : MonoBehaviour
         else
         {
             TogglePlayerSprite(false);
-        }
+        }*/
     }
     public void ResetPlayer() 
     {
@@ -166,33 +180,34 @@ public class PlayerScript : MonoBehaviour
     {
         _playerSprite.enabled = state;
     }
-    public void MoveToSpawnPoint()
+    public void MoveToSpawnPoint(Vector3 pos)
     {
-        if (_spawnPoint != null)
+        transform.position = new Vector3(pos.x, pos.y, pos.z);
+        /*if (_spawnPoint != null)
         {
-            gameObject.transform.position = new Vector3(_spawnPoint.position.x,
-                                                        _spawnPoint.position.y,
-                                                        _spawnPoint.position.z);
-            gameObject.transform.rotation = new Quaternion(_spawnPoint.rotation.x,
-                                                           _spawnPoint.rotation.y,
-                                                           _spawnPoint.rotation.z,
-                                                           _spawnPoint.rotation.w);
+            transform.position = new Vector3(pos.x, pos.y, pos.z);
+
+
+            gameObject.transform.rotation = new Quaternion(pos.x,
+                                                           pos.y,
+                                                           pos.z,
+                                                           pos.w);
         }
         else
         {
             Debug.Log("Spawn Error");
-        }
+        }*/
         Debug.Log("Player Spawned from GMEvent: " + transform.position);
     }
-    public void SpawnPlayer()
+    public void SpawnPlayer(Vector3 pos)
     {
         TogglePlayerSprite(true);
-        MoveToSpawnPoint();
+        MoveToSpawnPoint(pos);
     }
-    private void FindSpawnPoint()
+    /*private void FindSpawnPoint()
     {
         _spawnPoint = FindObjectOfType<SpawnPointScript>().transform;
-    }
+    }*/
 
     // Gameplay
     private void Move(Vector2 input)
@@ -323,7 +338,7 @@ public class PlayerScript : MonoBehaviour
         {
             TogglePlayerSprite(false);
             _sceneManager.LoadScene(_sceneToLoadOnDeath);
-            _UILinker.ScoreEndScreenUI.text = "Score: " + _gameManager.Score.ToString();
+            _UILinker.ScoreEndScreenUI.text = _gameManager.Score.ToString();
         }
     }
 

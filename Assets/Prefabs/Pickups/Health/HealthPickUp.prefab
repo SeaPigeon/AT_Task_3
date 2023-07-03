@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8030c3d9bd36ea94bb3550ca927ac6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthRestored: 10
+  _healthRestored: 20
   _ammoRestored: 10
   _pickUpType: 0
   _weaponToReload: 0

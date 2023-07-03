@@ -150,6 +150,7 @@ MonoBehaviour:
   _gameManager: {fileID: 0}
   _sceneManager: {fileID: 0}
   _audioManager: {fileID: 0}
+  _animator: {fileID: 0}
   _UILinker: {fileID: 0}
   _player: {fileID: 0}
   _firePoint: {fileID: 1621072152669190654}

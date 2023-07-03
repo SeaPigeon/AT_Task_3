@@ -340,7 +340,7 @@ MonoBehaviour:
   _currentHealth: 0
   _moveSpeed: 10
   _runSpeed: 0
-  _rotationSpeed: 120
+  _rotationSpeed: 140
   _fireDelay: 0.5
   _sceneToLoadOnDeath: EndGameScene
   _firePoint: {fileID: 798042637753171586}
