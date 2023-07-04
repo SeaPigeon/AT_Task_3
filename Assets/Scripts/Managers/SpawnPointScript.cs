@@ -75,7 +75,7 @@ public class SpawnPointScript : MonoBehaviour
         //Debug.Log("1: " + transform.position);
         transform.position = newPos;
         //Debug.Log("2: " + transform.position);
-        _player.SpawnPlayer(transform.position);
+        PlayerScript.PlayerInstance.SpawnPlayer(transform.position);
         //Debug.Log("3: " + transform.position);
     }
 }
