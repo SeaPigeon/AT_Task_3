@@ -46,6 +46,7 @@ MonoBehaviour:
   _gameMusic:
   - {fileID: 8300000, guid: 07b940f062d3f95428c2f32c1fa1fc56, type: 3}
   - {fileID: 8300000, guid: dfcb1b69dfa46e5419c211c917ce922c, type: 3}
+  - {fileID: 8300000, guid: 4098b6f8d156f924b8ea012361168a0f, type: 3}
   _gameSFX:
   - {fileID: 8300000, guid: 3c1bcbbf78492ba4e9dcf93ba0e2a229, type: 3}
   - {fileID: 8300000, guid: 974d682430f9ca1408872503b8fa428a, type: 3}

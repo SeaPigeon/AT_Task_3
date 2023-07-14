@@ -305,7 +305,6 @@ public class EnemyScript : MonoBehaviour
                 (hit.collider.CompareTag("Door") && 
                 hit.collider.GetComponent<DoorScript>().CurrentDoorState == DoorScript.DoorState.Closed))
             {
-                Debug.Log(hit);
                 return false;
             }
         }

@@ -90,7 +90,7 @@ public class AudioManagerScript : MonoBehaviour
 
                     break;
                 case GameState.InGame:
-                    StopMusic();
+                    PlayMusic(2);
                     break;
                 case GameState.InEditor:
                     PlayMusic(1);
