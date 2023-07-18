@@ -140,7 +140,8 @@ public class AudioManagerScript : MonoBehaviour
     // SFX
     public void PlaySFX(int clipIndex)
     {
-        AudioSource.PlayClipAtPoint(_gameSFX[clipIndex], CameraManagerScript.CMInstance.ActiveCamera.transform.position);
+        AudioSource.PlayClipAtPoint(_gameSFX[clipIndex], 
+                                    CameraManagerScript.CMInstance.ActiveCamera.transform.position);
     }
     public void PlayHealSFX()
     {

@@ -267,7 +267,7 @@ public class EnemyScript : MonoBehaviour
                     break;
                 default:
                     _navMeshAgent.isStopped = true;
-                    //Debug.Log("Inactive Enemy ERROR");
+                    Debug.Log("Inactive Enemy ERROR");
                     break;
             }
         }
@@ -332,7 +332,6 @@ public class EnemyScript : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            Debug.Log("dfsdfsdfsfsd");
             _gameManager.ChangeScore(_pointValue);
             _UILinker.ScoreTextUI.text = _gameManager.Score.ToString();
             _currentState = EnemyState.Dead;
